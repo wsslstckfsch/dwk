@@ -1,0 +1,22 @@
+<div class="uk-container uk-margin-top">
+  <div class="uk-overflow-auto">
+    <table class="uk-table uk-table-hover">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Date</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders" [routerLink]="'/orders/' + order.id">
+          <td># {{ order.id }}</td>
+          <td>{{ order.orderDate | date: "medium" }}</td>
+          <td>{{ order.total | currency }}</td>
+          <td>{{ order.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

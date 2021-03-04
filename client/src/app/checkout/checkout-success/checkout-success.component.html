@@ -1,3 +1,18 @@
 <div class="uk-container uk-margin-top">
-  <h2>Your order was successful</h2>
+  <h2>Thank you for your order</h2>
+
+  <button
+    *ngIf="order"
+    routerLink="/orders/{{ order?.id }}"
+    class="uk-button uk-button-default"
+  >
+    View your order
+  </button>
+  <button
+    *ngIf="!order"
+    routerLink="/orders"
+    class="uk-button uk-button-default"
+  >
+    View your orders
+  </button>
 </div>
