@@ -1,0 +1,81 @@
+@import "presets";
+
+// Import default variables and available mixins.
+@import "../../node_modules/uikit/src/scss/variables-theme";
+@import "../../node_modules/uikit/src/scss/mixins-theme";
+
+// Import UIkit.
+@import "../../node_modules/uikit/src/scss/uikit-theme";
+
+// ngx-toastr
+@import "../../node_modules/ngx-toastr/toastr.css";
+
+@font-face {
+  font-family: "antipasto";
+  src: url("../assets/fonts/Antipasto-Pro/Antipasto-Pro-Medium-OTF.otf") format("opentype");
+  font-weight: normal;
+  font-display: block;
+}
+
+html {
+  @include media("<m") {
+    font-size: 18px;
+  }
+  @include media(">m") {
+    font-size: 20px;
+  }
+}
+
+.img-overlay {
+  position: relative;
+
+  &:hover {
+    .overlay {
+      opacity: 1;
+    }
+  }
+
+  .overlay {
+    transition: 0.2s all;
+    opacity: 0;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    color: black;
+    background: rgba(white, 0.6);
+  }
+}
+
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.incrementer {
+  display: grid;
+  grid-template-columns: 50px 50px 50px;
+
+  .number {
+    display: grid;
+    place-items: center;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+
+.button-group {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+  justify-content: end;
+
+  > button {
+    min-width: 50px;
+  }
+}

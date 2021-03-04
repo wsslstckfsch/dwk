@@ -1,0 +1,18 @@
+<ng-container *ngIf="(basketTotal$ | async) as totals">
+  <h3>Order summary</h3>
+  <p><em>Shipping costs will be added later during checkout</em></p>
+  <ul class="uk-list">
+    <li>
+      <span>Subtotal:</span>
+      <span>{{totals.subtotal | currency}}</span>
+    </li>
+    <li>
+      <span>Shipping:</span>
+      <span>{{totals.shipping | currency}}</span>
+    </li>
+    <li>
+      <span>Total:</span>
+      <span>{{totals.total | currency}}</span>
+    </li>
+  </ul>
+</ng-container>

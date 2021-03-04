@@ -1,0 +1,56 @@
+@import "src/styles/presets";
+
+.navbar {
+  display: grid;
+  align-items: center;
+
+  @include media("<m") {
+    justify-items: center;
+    padding: 0.5rem 1rem;
+  }
+  @include media(">m") {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  &__list {
+    margin: 0;
+    display: grid;
+    grid-auto-flow: column;
+    padding: 0;
+    list-style: none;
+    gap: 0.5rem;
+    place-items: center;
+
+    &:last-child {
+      @include media("<m") {
+        font-size: 0.9rem;
+      }
+    }
+
+    > li:nth-child(even) {
+      display: block;
+      background: black;
+      border-radius: 50%;
+      @include media("<m") {
+        height: 5px;
+        width: 5px;
+      }
+      @include media(">m") {
+        height: 8px;
+        width: 8px;
+      }
+
+      a {
+        color: black;
+        font-weight: 500;
+
+        &.active {
+          color: dodgerblue;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

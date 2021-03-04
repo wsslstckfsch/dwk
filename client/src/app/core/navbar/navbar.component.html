@@ -1,0 +1,40 @@
+<nav class="uk-navbar-container navbar" uk-navbar>
+
+  <ul class="navbar__list">
+    <li><a [routerLinkActiveOptions]="{exact: true}" routerLink="/shop" routerLinkActive="active">SHOP</a></li>
+    <li></li>
+    <li><a [routerLinkActiveOptions]="{exact: true}" routerLink="/basket" routerLinkActive="active">WARENKORB</a></li>
+    <li></li>
+    <li><a href="#">KONTAKT</a></li>
+    <li></li>
+    <li>
+      <ng-container *ngIf="(currentUser$ | async) === null">
+        <a [routerLinkActiveOptions]="{exact: true}" routerLink="/account/login" routerLinkActive="active">ACCOUNT</a>
+      </ng-container>
+      <ng-container *ngIf="(currentUser$ | async)">
+        <a [routerLinkActiveOptions]="{exact: true}" routerLink="/account" routerLinkActive="active">ACCOUNT</a>
+        <div uk-dropdown="mode: click">
+          <ul class="uk-nav uk-dropdown-nav">
+            <li class="uk-active">{{(currentUser$|async).email}}</li>
+            <li><a href="#">Orders</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a (click)="logout()" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </ng-container>
+    </li>
+  </ul>
+
+  <ul class="navbar__list">
+    <li class="uk-active"><a href="#">DEUTSCH</a></li>
+    <li></li>
+    <li><a href="#">ENGLISCH</a></li>
+    <li></li>
+    <li><a href="#">SPANISCH</a></li>
+    <li></li>
+    <li><a href="#">RUSSISCH</a></li>
+    <li></li>
+    <li><a href="#">JAPANISCH</a></li>
+  </ul>
+
+</nav>

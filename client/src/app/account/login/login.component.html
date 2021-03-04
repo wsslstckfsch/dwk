@@ -1,0 +1,16 @@
+<ng-container>
+  <div class="uk-container uk-margin-top">
+
+    <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="uk-form-stacked">
+
+      <app-text-input [label]="'Email address'" formControlName="email"></app-text-input>
+      <app-text-input [label]="'Password'" [type]="'password'" formControlName="password"></app-text-input>
+
+      <div class="uk-margin">
+        <button [disabled]="loginForm.invalid" class="uk-button uk-button-primary">Login</button>
+      </div>
+
+    </form>
+
+  </div>
+</ng-container>

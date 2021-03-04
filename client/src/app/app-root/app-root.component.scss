@@ -1,0 +1,41 @@
+@import "src/styles/presets";
+
+.footer {
+  margin-top: 2rem;
+  background-color: $grey-l;
+}
+
+.cart-btn {
+  position: fixed;
+  right: 5vw;
+  bottom: 5vw;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: black;
+  display: grid;
+  place-items: center;
+  color: white;
+  transition: 0.2s all;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+  &:hover {
+    color: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transform: scale(1.2);
+  }
+
+  &__indicator {
+    background: $blue-l;
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5rem;
+    line-height: 0;
+    height: 20px;
+    width: 20px;
+    display: grid;
+    place-items: center;
+    padding: 0.3rem;
+    border-radius: 50%;
+  }
+}

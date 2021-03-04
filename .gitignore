@@ -1,0 +1,11 @@
+bin
+obj
+node_modules
+wwwroot/node_modules
+appsettings.json
+Migrations
+*.db
+*.rdb
+.idea
+.vs
+.vscode

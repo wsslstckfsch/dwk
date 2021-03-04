@@ -1,0 +1,25 @@
+@import "../../node_modules/include-media/dist/include-media.scss";
+
+$breakpoints: (
+  "s": 640px,
+  "m": 960px,
+  "l": 1200px,
+  "xl": 1600px,
+);
+
+$grey-l: #e2e2e2;
+$grey: rgb(80, 80, 80);
+$grey-d: #171717;
+$blue-l: rgb(22, 149, 192);
+$red: red;
+
+$global-font-family: "antipasto", sans-serif;
+$global-primary-background: $grey-d;
+$global-link-color: $grey-d;
+$global-link-hover-color: $grey-d;
+$button-secondary-background: $grey;
+$button-secondary-color: lighten($button-secondary-background, 30%);
+$button-secondary-hover-background: darken($button-secondary-background, 2%);
+$button-secondary-hover-color: lighten($button-secondary-background, 35%);
+$button-secondary-active-background: darken($button-secondary-background, 5%);
+$button-secondary-active-color: lighten($button-secondary-background, 35%);

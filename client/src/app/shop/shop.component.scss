@@ -1,0 +1,73 @@
+@import "src/styles/presets";
+
+.top-bar {
+  display: grid;
+  @include media(">m") {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: grid;
+    gap: 0.3rem;
+    @include media(">m") {
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+
+  &__right {
+    display: grid;
+    gap: 0.3rem;
+    @include media("<m") {
+      margin-top: 0.3rem;
+    }
+    @include media(">m") {
+      grid-template-columns: minmax(300px, 1fr) repeat(2, auto);
+    }
+  }
+}
+
+.cards {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  @include media(">m") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include media(">l") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  .uk-card-media-top {
+    display: block;
+    padding: 1rem;
+  }
+
+  .uk-card-body {
+    display: grid;
+    gap: 0.6rem;
+
+    * {
+      margin: 0;
+    }
+  }
+
+  &__image {
+    height: 300px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  &__label {
+    justify-self: start;
+  }
+
+  &__last-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

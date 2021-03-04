@@ -1,0 +1,13 @@
+.img-name {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: start;
+  gap: 0.5rem;
+
+  img {
+    min-width: 50px;
+    max-height: 60px;
+    object-fit: contain;
+  }
+}

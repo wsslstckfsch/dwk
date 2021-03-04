@@ -1,0 +1,40 @@
+@import "src/styles/presets";
+
+.product-grid {
+  display: grid;
+  margin: 0 auto;
+  @include media("<m") {
+    grid-template-columns: 0.5fr 1fr;
+  }
+  @include media(">m") {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &__image {
+    align-self: start;
+  }
+
+  &__info {
+    padding: 1rem;
+    display: grid;
+    grid-auto-flow: row;
+    align-content: start;
+    gap: 1rem;
+
+    > * {
+      margin: 0;
+    }
+  }
+}
+
+.cart-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 1rem;
+
+  &__add {
+    min-width: 60px;
+    white-space: nowrap;
+  }
+}

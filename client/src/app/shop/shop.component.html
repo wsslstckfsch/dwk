@@ -1,0 +1,59 @@
+<ng-container *ngIf="productTypes && products">
+
+  <div class="uk-container uk-margin-large-top">
+
+    <hr class="uk-divider-icon">
+
+    <div class="top-bar uk-margin-large-top">
+      <div class="top-bar__left">
+        <select (change)="onSortSelected($event)" class="uk-select">
+          <option *ngFor="let option of sortOptions" [value]="option.value">{{option.name}}</option>
+        </select>
+
+        <select (change)="onTypeSelected($event)" class="uk-select">
+          <option *ngFor="let type of productTypes" [value]="type.id">{{type.name}}</option>
+        </select>
+      </div>
+
+      <div class="top-bar__right">
+        <div class="uk-inline">
+          <a class="uk-form-icon" href="#" uk-icon="icon: search"></a>
+          <input #search (keyup.enter)="onSearch()" class="uk-input" type="text">
+        </div>
+        <button (click)="onSearch()" class="uk-button uk-button-default">Suchen</button>
+        <button (click)="onReset()" class="uk-button uk-button-default">Reset</button>
+      </div>
+    </div>
+
+    <ul class="cards">
+      <li *ngFor="let product of products" class="card">
+        <div class="uk-card uk-card-default">
+          <a class="uk-card-media-top img-overlay" href="/shop/{{product.id}}">
+            <img [src]="product.imageUrl" alt="" class="card__image">
+            <div class="overlay">
+              <span uk-icon="icon: search; ratio: 3;"></span>
+            </div>
+          </a>
+          <div class="uk-card-body">
+            <a href="/shop/{{product.id}}">
+              <h3 class="uk-card-title">{{product.name}}</h3>
+            </a>
+            <div class="labels">
+              <span class="uk-label card__label">{{product.productType}}</span>
+              <span class="uk-label card__label">{{product.langAlpha2}}</span>
+            </div>
+            <div class="card__last-row">
+              <p>{{product.price | currency}}</p>
+              <button (click)="addItemToBasket(product)" class="uk-button uk-button-default">
+                <span uk-icon="cart"></span>
+                <span uk-icon="icon: plus; ratio: 0.6;"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</ng-container>

@@ -1,0 +1,17 @@
+<div class="uk-margin">
+  <label class="uk-form-label">{{label}}</label>
+  <div class="uk-form-controls">
+    <input #input
+           (blur)="onTouched()"
+           (input)="onChange($event)"
+           [id]="label"
+           [ngClass]="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched) && 'uk-form-danger'"
+           [placeholder]="label"
+           [type]="type"
+           class="uk-input">
+  </div>
+  <ng-container *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
+    <small *ngIf="controlDir.control.errors?.required">{{label}} is required</small>
+    <small *ngIf="controlDir.control.errors?.pattern">Invalid {{label}}</small>
+  </ng-container>
+</div>
