@@ -1,36 +1,105 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../account.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import {
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { AccountService } from '../account.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  registerForm: FormGroup;
+  returnUrl: string;
 
-  constructor(private accountService: AccountService, private router: Router) {
-  }
+  registerErrors: string[];
+
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
     this.createLoginForm();
+    this.createRegisterForm();
   }
 
   createLoginForm(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-      password: new FormControl('', Validators.required)
+    this.loginForm = this.fb.group({
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
+        ],
+      ],
+      password: [null, [Validators.required]],
+    });
+  }
+
+  createRegisterForm(): void {
+    this.registerForm = this.fb.group({
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
+        ],
+        [this.validateEmailNotTaken()],
+      ],
+      password: [null, [Validators.required]],
     });
   }
 
   onLogin(): void {
-    this.accountService.login(this.loginForm.value).subscribe(() => {
-      this.router.navigateByUrl('/shop');
-    }, error => {
-      console.log(error);
-    });
+    this.accountService.login(this.loginForm.value).subscribe(
+      () => {
+        this.router.navigateByUrl(this.returnUrl);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
+  onRegister(): void {
+    this.accountService.register(this.registerForm.value).subscribe(
+      (response) => {
+        this.router.navigateByUrl('/shop');
+      },
+      (error) => {
+        console.log(error);
+        this.registerErrors = error.errors;
+      }
+    );
+  }
+
+  validateEmailNotTaken(): AsyncValidatorFn {
+    return (control) => {
+      return timer(500).pipe(
+        switchMap(() => {
+          if (!control.value) {
+            return of(null);
+          }
+          return this.accountService.checkEmailExists(control.value).pipe(
+            map((res) => {
+              return res ? { emailExists: true } : null;
+            })
+          );
+        })
+      );
+    };
+  }
 }

@@ -1,17 +1,65 @@
 <div class="uk-margin">
-  <label class="uk-form-label">{{label}}</label>
-  <div class="uk-form-controls">
-    <input #input
-           (blur)="onTouched()"
-           (input)="onChange($event)"
-           [id]="label"
-           [ngClass]="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched) && 'uk-form-danger'"
-           [placeholder]="label"
-           [type]="type"
-           class="uk-input">
+  <label class="uk-form-label">{{ label }}</label>
+  <div
+    [class.form-control-icon]="
+      controlDir &&
+      controlDir.control &&
+      controlDir.control.status === 'PENDING'
+    "
+    class="uk-form-controls"
+  >
+    <input
+      #input
+      (blur)="onTouched()"
+      (input)="onChange($event)"
+      [class.uk-form-danger]="
+        controlDir &&
+        controlDir.control &&
+        !controlDir.control.valid &&
+        controlDir.control.touched
+      "
+      [id]="label"
+      [placeholder]="label"
+      [type]="type"
+      class="uk-input"
+    />
+    <ng-container
+      *ngIf="
+        controlDir &&
+        controlDir.control &&
+        controlDir.control.status === 'PENDING'
+      "
+    >
+      <div uk-spinner="ratio: 0.7"></div>
+    </ng-container>
   </div>
-  <ng-container *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
-    <small *ngIf="controlDir.control.errors?.required">{{label}} is required</small>
-    <small *ngIf="controlDir.control.errors?.pattern">Invalid {{label}}</small>
+
+  <ng-container
+    *ngIf="
+      controlDir &&
+      controlDir.control &&
+      !controlDir.control.valid &&
+      controlDir.control.touched
+    "
+  >
+    <small *ngIf="controlDir.control.errors?.required"
+      >{{ label }} is required</small
+    >
+    <small *ngIf="controlDir.control.errors?.pattern"
+      >Invalid {{ label }}</small
+    >
+  </ng-container>
+
+  <ng-container
+    *ngIf="
+      controlDir &&
+      controlDir.control &&
+      !controlDir.control.valid &&
+      controlDir.control.dirty
+    "
+  >
+    <small *ngIf="controlDir.control.errors?.emailExists"
+      >Email already in use</small
+    >
   </ng-container>
 </div>

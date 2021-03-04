@@ -1,16 +1,65 @@
 <ng-container>
   <div class="uk-container uk-margin-top">
+    <div>
+      <h2>Login</h2>
 
-    <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="uk-form-stacked">
+      <form
+        (ngSubmit)="onLogin()"
+        [formGroup]="loginForm"
+        class="uk-form-stacked"
+      >
+        <app-text-input
+          [label]="'Email address'"
+          formControlName="email"
+        ></app-text-input>
+        <app-text-input
+          [label]="'Password'"
+          [type]="'password'"
+          formControlName="password"
+        ></app-text-input>
 
-      <app-text-input [label]="'Email address'" formControlName="email"></app-text-input>
-      <app-text-input [label]="'Password'" [type]="'password'" formControlName="password"></app-text-input>
+        <div class="uk-margin">
+          <button
+            [disabled]="loginForm.invalid"
+            class="uk-button uk-button-primary"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
 
-      <div class="uk-margin">
-        <button [disabled]="loginForm.invalid" class="uk-button uk-button-primary">Login</button>
-      </div>
+    <div>
+      <h2>Register</h2>
 
-    </form>
+      <ul *ngIf="registerErrors" class="uk-list">
+        <li *ngFor="let error of registerErrors">{{ error }}</li>
+      </ul>
 
+      <form
+        (ngSubmit)="onRegister()"
+        [formGroup]="registerForm"
+        class="uk-form-stacked"
+      >
+        <app-text-input
+          [label]="'Email address'"
+          formControlName="email"
+        ></app-text-input>
+        <app-text-input
+          [label]="'Password'"
+          [type]="'password'"
+          formControlName="password"
+        ></app-text-input>
+
+        <div class="uk-margin">
+          <button
+            [disabled]="registerForm.invalid"
+            class="uk-button uk-button-primary"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </ng-container>

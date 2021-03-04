@@ -1,18 +1,25 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {NavigationExtras, Router} from '@angular/router';
-import {Injectable} from '@angular/core';
-import {catchError} from 'rxjs/operators';
-import {ToastrService} from 'ngx-toastr';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { NavigationExtras, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private toastr: ToastrService) {
-  }
+  constructor(private router: Router, private toastr: ToastrService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
-      catchError(error => {
+      catchError((error) => {
         if (error) {
           if (error.status === 400) {
             if (error.error.errors) {
@@ -28,7 +35,9 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.router.navigateByUrl('/not-found');
           }
           if (error.status === 500) {
-            const navigationExtras: NavigationExtras = {state: {error: error.error}};
+            const navigationExtras: NavigationExtras = {
+              state: { error: error.error },
+            };
             this.router.navigateByUrl('/server-error');
           }
         }
@@ -36,5 +45,4 @@ export class ErrorInterceptor implements HttpInterceptor {
       })
     );
   }
-
 }

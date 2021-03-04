@@ -1,16 +1,21 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {NavbarComponent} from './navbar/navbar.component';
-import {RouterModule} from '@angular/router';
-import {NotFoundComponent} from './not-found/not-found.component';
-import {ServerErrorComponent} from './server-error/server-error.component';
-import {ToastrModule} from 'ngx-toastr';
-import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
-import {BreadcrumbModule} from 'xng-breadcrumb';
-import {SharedModule} from "../shared/shared.module";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [NavbarComponent, NotFoundComponent, ServerErrorComponent, BreadcrumbsComponent],
+  declarations: [
+    NavbarComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    BreadcrumbsComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,10 +23,9 @@ import {SharedModule} from "../shared/shared.module";
     BreadcrumbModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
-      preventDuplicates: true
-    })
+      preventDuplicates: true,
+    }),
   ],
-  exports: [NavbarComponent, BreadcrumbsComponent]
+  exports: [NavbarComponent, BreadcrumbsComponent],
 })
-export class CoreModule {
-}
+export class CoreModule {}

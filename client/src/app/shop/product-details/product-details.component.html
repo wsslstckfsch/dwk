@@ -1,32 +1,39 @@
 <ng-container *ngIf="product">
-
   <div class="product-grid uk-container uk-margin-top">
-
     <a (click)="openLightbox()" class="product-grid__image img-overlay">
-      <img [src]="product.imageUrl" alt="">
+      <img [src]="product.imageUrl" alt="" />
       <div class="overlay">
         <span uk-icon="icon: search; ratio: 3;"></span>
       </div>
     </a>
 
     <div class="product-grid__info">
-      <h2>{{product.name}}</h2>
+      <h2>{{ product.name }}</h2>
       <div class="labels">
-        <span class="uk-label card__label">{{product.productType}}</span>
-        <span class="uk-label card__label">{{product.langAlpha2}}</span>
+        <span class="uk-label card__label">{{ product.productType }}</span>
+        <span class="uk-label card__label">{{ product.langAlpha2 }}</span>
       </div>
-      <h4>{{product.price | currency}}</h4>
+      <h4>{{ product.price | currency }}</h4>
       <div class="cart-buttons">
         <div class="incrementer">
-          <button (click)="decrementQuantity()" class="uk-button uk-button-default uk-button-small">
+          <button
+            (click)="decrementQuantity()"
+            class="uk-button uk-button-default uk-button-small"
+          >
             <span uk-icon="icon: minus; ratio: 0.5;"></span>
           </button>
-          <span class="number">{{quantity}}</span>
-          <button (click)="incrementQuantity()" class="uk-button uk-button-default uk-button-small">
+          <span class="number">{{ quantity }}</span>
+          <button
+            (click)="incrementQuantity()"
+            class="uk-button uk-button-default uk-button-small"
+          >
             <span uk-icon="icon: plus; ratio: 0.5;"></span>
           </button>
         </div>
-        <button (click)="addItemToBasket()" class="uk-button uk-button-primary uk-button-small cart-buttons__add">
+        <button
+          (click)="addItemToBasket()"
+          class="uk-button uk-button-default uk-button-small cart-buttons__add"
+        >
           <span uk-icon="cart"></span>
           <span uk-icon="icon: plus; ratio: 0.6;"></span>
         </button>
@@ -34,15 +41,19 @@
       <div [innerHTML]="product.description"></div>
 
       <div id="lightbox" uk-lightbox="animation: slide">
-        <a data-caption="Caption 1" href="https://localhost:5001/images/products/1.png">Vorschau</a>
-        <a data-caption="Caption 2" href="https://localhost:5001/images/products/2.png"></a>
+        <a
+          data-caption="Caption 1"
+          href="https://localhost:5001/images/products/1.png"
+          >Vorschau</a
+        >
+        <a
+          data-caption="Caption 2"
+          href="https://localhost:5001/images/products/2.png"
+        ></a>
         <a data-caption="Caption 3" href="https://picsum.photos/500"></a>
       </div>
-
     </div>
-
   </div>
-
 </ng-container>
 
 <app-shop></app-shop>

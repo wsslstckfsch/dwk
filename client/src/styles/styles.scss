@@ -79,3 +79,14 @@ html {
     min-width: 50px;
   }
 }
+
+.form-control-icon {
+  position: relative;
+
+  .uk-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
