@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { IUser } from '../shared/models/user';
+import { IUserAddress } from '../shared/models/userAddress';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,19 @@ export class AccountService {
   checkEmailExists(email: string): Observable<boolean> {
     return this.http.get<boolean>(
       `${this.baseUrl}/account/email-exists?email=${email}`
+    );
+  }
+
+  getUserShippingAddress(): Observable<IUserAddress> {
+    return this.http.get<IUserAddress>(
+      `${this.baseUrl}/account/shipping-address`
+    );
+  }
+
+  updateUserShippingAddress(address: IUserAddress): Observable<IUserAddress> {
+    return this.http.put<IUserAddress>(
+      `${this.baseUrl}/account/shipping-address`,
+      address
     );
   }
 }

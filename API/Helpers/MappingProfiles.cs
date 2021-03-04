@@ -14,13 +14,12 @@ namespace API.Helpers
           o => o.MapFrom(s => s.ProductType.Name))
         .ForMember(d => d.ImageUrl,
           o => o.MapFrom<ProductImageUrlResolver>());
-      
+
       CreateMap<ProductImage, ProductImageToReturnDto>();
 
       CreateMap<Core.Entities.Identity.ShippingAddress, ShippingAddressToReturnDto>().ReverseMap();
-      
-      // ReSharper disable once RedundantNameQualifier
-      CreateMap<ShippingAddressToReturnDto, Core.Entities.OrderAggregate.ShippingAddress>();
+
+      CreateMap<ShippingAddressToReturnDto, ShippingAddress>();
 
       CreateMap<CustomerBasketDto, CustomerBasket>();
 
@@ -28,8 +27,8 @@ namespace API.Helpers
 
       CreateMap<Order, OrderToReturnDto>()
         .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
-        .ForMember(d => d.ShippingAddress, o => o.MapFrom(s => s.DeliveryMethod.Price));
-      
+        .ForMember(d => d.ShippingPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));
+
       CreateMap<OrderItem, OrderItemDto>()
         .ForMember(d => d.ProductId, o => o.MapFrom(s => s.ItemOrdered.ProductItemId))
         .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))

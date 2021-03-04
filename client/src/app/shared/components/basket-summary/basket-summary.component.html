@@ -1,0 +1,55 @@
+<ng-container *ngIf="basket$ | async as basket">
+  <div class="uk-overflow-auto">
+    <table class="uk-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th *ngIf="!isBasket">Quantity</th>
+          <th>Total</th>
+          <th *ngIf="isBasket"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of basket.items">
+          <td>
+            <div class="img-name">
+              <img [src]="item.imageUrl" alt="" />
+              <a [href]="'/shop/' + item.id" class="uk-text-nowrap"
+                ><span>{{ item.productName }}</span></a
+              >
+            </div>
+          </td>
+          <td>{{ item.price | currency }}</td>
+          <td *ngIf="!isBasket">{{ item.quantity }}</td>
+          <td>{{ item.price * item.quantity | currency }}</td>
+          <td *ngIf="isBasket">
+            <div class="button-group">
+              <div class="incrementer">
+                <button
+                  (click)="decrementItemQuantity(item)"
+                  class="uk-button uk-button-default uk-button-small"
+                >
+                  <span uk-icon="icon: minus; ratio: 0.5;"></span>
+                </button>
+                <span class="number">{{ item.quantity }}</span>
+                <button
+                  (click)="incrementItemQuantity(item)"
+                  class="uk-button uk-button-default uk-button-small"
+                >
+                  <span uk-icon="icon: plus; ratio: 0.5;"></span>
+                </button>
+              </div>
+              <button
+                (click)="removeBasketItem(item)"
+                class="uk-button uk-button-default uk-button-small"
+              >
+                <span uk-icon="icon: close;"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>

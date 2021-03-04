@@ -12,7 +12,8 @@
 
 @font-face {
   font-family: "antipasto";
-  src: url("../assets/fonts/Antipasto-Pro/Antipasto-Pro-Medium-OTF.otf") format("opentype");
+  src: url("../assets/fonts/Antipasto-Pro/Antipasto-Pro-Medium-OTF.otf")
+    format("opentype");
   font-weight: normal;
   font-display: block;
 }
@@ -38,7 +39,7 @@ html {
   .overlay {
     transition: 0.2s all;
     opacity: 0;
-    content: '';
+    content: "";
     top: 0;
     right: 0;
     bottom: 0;
@@ -80,6 +81,20 @@ html {
   }
 }
 
+.img-name {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: start;
+  gap: 0.5rem;
+
+  img {
+    min-width: 50px;
+    max-height: 60px;
+    object-fit: contain;
+  }
+}
+
 .form-control-icon {
   position: relative;
 
@@ -89,4 +104,17 @@ html {
     top: 50%;
     transform: translateY(-50%);
   }
+}
+
+.cols-between {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.text-icon {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 0.3rem;
 }

@@ -57,7 +57,7 @@ namespace API.Controllers
     }
 
     [Authorize]
-    [HttpPut("addresses")]
+    [HttpPut("shipping-address")]
     public async Task<ActionResult<ShippingAddressToReturnDto>> UpdateUserShippingAddress(
       ShippingAddressToReturnDto address)
     {
