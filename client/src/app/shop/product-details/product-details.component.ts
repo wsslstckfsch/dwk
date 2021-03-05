@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../shared/models/product';
 import { ShopService } from '../shop.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { filter } from 'rxjs/operators';
 
 import UIkit from 'uikit';
 import { BasketService } from '../../basket/basket.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -13,6 +15,7 @@ import { BasketService } from '../../basket/basket.service';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
+  staticContentUrl = environment.staticContentUrl;
   product: IProduct;
   quantity = 1;
 
@@ -20,14 +23,19 @@ export class ProductDetailsComponent implements OnInit {
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
     private bcService: BreadcrumbService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private router: Router
   ) {
     this.bcService.set('@productDetails', '');
+
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.getProduct();
+      });
   }
 
-  ngOnInit(): void {
-    this.getProduct();
-  }
+  ngOnInit(): void {}
 
   addItemToBasket(): void {
     this.basketService.addItemToBasket(this.product, this.quantity);
@@ -49,6 +57,7 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(
         (product) => {
           this.product = product;
+          console.log(this.product.name);
           this.bcService.set('@productDetails', product.name);
         },
         (error) => {

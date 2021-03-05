@@ -1,3 +1,4 @@
+using System.IO;
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using StackExchange.Redis;
 
 namespace API
@@ -26,8 +28,12 @@ namespace API
     {
       services.AddAutoMapper(typeof(MappingProfiles));
       services.AddControllers();
-      services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-      services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+
+      // services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("SQLiteDefaultConnection")));
+      // services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("SQLiteIdentityConnection")));
+      services.AddDbContext<StoreContext>(x => x.UseNpgsql(_config.GetConnectionString("PostgreSQLDefaultConnection")));
+      services.AddDbContext<AppIdentityDbContext>(x =>
+        x.UseNpgsql(_config.GetConnectionString("PostgreSQLIdentityConnection")));
 
       services.AddSingleton<IConnectionMultiplexer>(_ =>
       {
@@ -57,6 +63,13 @@ namespace API
       app.UseRouting();
 
       app.UseStaticFiles();
+      app.UseStaticFiles(new StaticFileOptions
+      {
+        FileProvider = new PhysicalFileProvider(
+          Path.Combine(Directory.GetCurrentDirectory(), "Static")
+        ),
+        RequestPath = "/static"
+      });
 
       app.UseCors("CorsPolicy");
 
@@ -66,7 +79,11 @@ namespace API
 
       app.UseSwaggerDocumentation();
 
-      app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapControllers();
+        endpoints.MapFallbackToController("Index", "Fallback");
+      });
     }
   }
 }

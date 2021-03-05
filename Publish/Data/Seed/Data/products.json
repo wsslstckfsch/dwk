@@ -1,0 +1,24 @@
+﻿[
+  {
+    "Id": 1,
+    "LangAlpha2": "DE",
+    "Name": "DIE WIENER KÜCHE",
+    "Description": "irure commodo ullamco duis cillum sunt elit deserunt deserunt non culpa velit nulla voluptate esse do sint laborum nulla ullamco",
+    "ImageUrl": "images/products/1.png",
+    "Pages": 90,
+    "Price": 10,
+    "Isbn": "978-3-9519859-5-4",
+    "ProductTypeId": 1
+  },
+  {
+    "Id": 2,
+    "LangAlpha2": "EN",
+    "Name": "VIENNESE COOKING",
+    "Description": "culpa consectetur aliqua ut dolore eu pariatur et cillum minim excepteur exercitation mollit ullamco id qui pariatur veniam dolor voluptate",
+    "ImageUrl": "images/products/2.png",
+    "Pages": 96,
+    "Price": 20,
+    "Isbn": "978-3-9519859-1-6",
+    "ProductTypeId": 2
+  }
+]

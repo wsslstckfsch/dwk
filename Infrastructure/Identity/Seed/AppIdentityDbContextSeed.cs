@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity.Seed
 {
-  public class SeedData
+  public class AppIdentityDbContextSeed
   {
-    public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager)
     {
       if (!userManager.Users.Any())
       {

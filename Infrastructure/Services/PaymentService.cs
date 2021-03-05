@@ -105,7 +105,7 @@ namespace Infrastructure.Services
     {
       var spec = new OrderByPaymentIntentIdSpec(paymentIntentId);
       var order = await _unityOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
-      
+
       if (order == null)
       {
         return null;
@@ -113,7 +113,7 @@ namespace Infrastructure.Services
 
       order.Status = OrderStatus.PaymentFailed;
       _unityOfWork.Repository<Order>().Update(order);
-      
+
       await _unityOfWork.Complete();
 
       return order;

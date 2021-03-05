@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers
 {
-  public class OrderItemImageUrlResolver: IValueResolver<OrderItem, OrderItemDto, string>
+  public class OrderItemImageUrlResolver : IValueResolver<OrderItem, OrderItemDto, string>
   {
     private readonly IConfiguration _config;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -10,15 +11,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data.Seed
 {
-  public class SeedData
+  public class StoreContextSeed
   {
     public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
     {
+      var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
       try
       {
         if (!context.ProductTypes.Any())
         {
-          var data = File.ReadAllText("../Infrastructure/Data/Seed/Data/productTypes.json");
+          var data = await File.ReadAllTextAsync(path + @"/Data/Seed/Data/productTypes.json");
           var list = JsonSerializer.Deserialize<List<ProductType>>(data);
           foreach (var item in list) context.ProductTypes.Add(item);
 
@@ -27,7 +30,7 @@ namespace Infrastructure.Data.Seed
 
         if (!context.Products.Any())
         {
-          var data = File.ReadAllText("../Infrastructure/Data/Seed/Data/products.json");
+          var data = await File.ReadAllTextAsync(path + @"/Data/Seed/Data/products.json");
           var list = JsonSerializer.Deserialize<List<Product>>(data);
           foreach (var item in list) context.Products.Add(item);
 
@@ -36,7 +39,7 @@ namespace Infrastructure.Data.Seed
 
         if (!context.DeliveryMethods.Any())
         {
-          var data = File.ReadAllText("../Infrastructure/Data/Seed/Data/delivery.json");
+          var data = await File.ReadAllTextAsync(path + @"/Data/Seed/Data/delivery.json");
           var list = JsonSerializer.Deserialize<List<DeliveryMethod>>(data);
           foreach (var item in list) context.DeliveryMethods.Add(item);
 
@@ -45,7 +48,7 @@ namespace Infrastructure.Data.Seed
       }
       catch (Exception ex)
       {
-        var logger = loggerFactory.CreateLogger<SeedData>();
+        var logger = loggerFactory.CreateLogger<StoreContextSeed>();
         logger.LogError(ex.Message);
       }
     }

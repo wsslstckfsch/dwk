@@ -40,15 +40,17 @@
       </div>
       <div [innerHTML]="product.description"></div>
 
+      <small>{{ staticContentUrl }}/static/images/products/1.png</small>
+
       <div id="lightbox" uk-lightbox="animation: slide">
         <a
           data-caption="Caption 1"
-          href="https://localhost:5001/images/products/1.png"
+          href="{{ staticContentUrl }}/static/images/products/1.png"
           >Vorschau</a
         >
         <a
           data-caption="Caption 2"
-          href="https://localhost:5001/images/products/2.png"
+          href="{{ staticContentUrl }}/static/images/products/2.png"
         ></a>
         <a data-caption="Caption 3" href="https://picsum.photos/500"></a>
       </div>
