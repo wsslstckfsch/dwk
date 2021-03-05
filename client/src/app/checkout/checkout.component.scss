@@ -1,9 +1,1 @@
 @import "src/styles/presets";
-
-.checkout-grid {
-  display: grid;
-  gap: 1rem;
-  @include media(">m") {
-    grid-template-columns: 1fr 500px;
-  }
-}

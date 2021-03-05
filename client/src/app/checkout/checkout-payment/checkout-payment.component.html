@@ -1,12 +1,44 @@
-<p>checkout-payment works!</p>
+<div [formGroup]="checkoutForm">
+  <div formGroupName="paymentForm">
+    <app-text-input
+      [label]="'Name on card'"
+      formControlName="nameOnCard"
+    ></app-text-input>
+  </div>
+  <div class="stripe-grid">
+    <div #cardNumber></div>
+    <div #cardExpiry></div>
+    <div #cardCvc></div>
+    <ng-container *ngIf="cardErrors">
+      <span>{{ cardErrors }}</span>
+    </ng-container>
+  </div>
+</div>
 
 <div class="cols-between">
   <button (click)="switchTab(1)" class="uk-button uk-button-default text-icon">
     <span uk-icon="icon: chevron-left"></span>
     <span>Review</span>
   </button>
-  <button (click)="submitOrder()" class="uk-button uk-button-default text-icon">
+  <button
+    (click)="submitOrder()"
+    [disabled]="
+      loading ||
+      checkoutForm.get('paymentForm').invalid ||
+      !cardNumberValid ||
+      !cardExpiryValid ||
+      !cardCvcValid
+    "
+    class="uk-button uk-button-default text-icon"
+  >
     <span>Submit order</span>
-    <span uk-icon="icon: chevron-right"></span>
+
+    <ng-container *ngIf="!loading">
+      <span uk-icon="icon: chevron-right"></span>
+    </ng-container>
+
+    <ng-container *ngIf="loading">
+      <div uk-spinner="ratio: 0.7"></div>
+    </ng-container>
   </button>
 </div>

@@ -1,17 +1,33 @@
 <div class="uk-container uk-margin-top">
   <ng-container *ngIf="(basket$ | async) === null">
     <h2>No items in basket</h2>
+    <button routerLink="/shop" class="uk-button uk-button-default text-icon">
+      <span uk-icon="icon: cart"></span>
+      <span>Back to Shop</span>
+    </button>
   </ng-container>
 
-  <app-basket-summary
-    (decrement)="decrementItemQuantity($event)"
-    (increment)="incrementItemQuantity($event)"
-    (remove)="removeBasketItem($event)"
-  ></app-basket-summary>
+  <ng-container *ngIf="basket$ | async">
+    <div class="checkout-grid">
+      <div class="uk-overflow-auto">
+        <app-basket-summary
+          (decrement)="decrementItemQuantity($event)"
+          (increment)="incrementItemQuantity($event)"
+          (remove)="removeBasketItem($event)"
+          [items]="(basket$ | async) && (basket$ | async).items"
+        ></app-basket-summary>
+      </div>
 
-  <app-order-totals></app-order-totals>
+      <app-order-totals
+        *ngIf="basketTotals$ | async as totals"
+        [shippingPrice]="totals.shipping"
+        [subtotal]="totals.subtotal"
+        [total]="totals.total"
+      ></app-order-totals>
+    </div>
 
-  <a class="uk-button uk-button-primary" routerLink="/checkout"
-    >Proceed to checkout</a
-  >
+    <a class="uk-button uk-button-primary" routerLink="/checkout"
+      >Proceed to checkout</a
+    >
+  </ng-container>
 </div>

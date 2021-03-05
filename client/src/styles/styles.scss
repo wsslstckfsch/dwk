@@ -95,7 +95,7 @@ html {
   }
 }
 
-.form-control-icon {
+.spinner-container {
   position: relative;
 
   .uk-icon {
@@ -117,4 +117,20 @@ html {
   grid-auto-flow: column;
   align-items: center;
   gap: 0.3rem;
+}
+
+.uk-table-hover {
+  tbody {
+    tr {
+      cursor: pointer;
+    }
+  }
+}
+
+.checkout-grid {
+  display: grid;
+  gap: 1rem;
+  @include media(">l") {
+    grid-template-columns: 1fr 500px;
+  }
 }

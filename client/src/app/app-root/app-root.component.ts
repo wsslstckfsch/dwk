@@ -26,7 +26,7 @@ export class AppRootComponent implements OnInit {
     const token = localStorage.getItem('token');
     this.accountService.loadCurrentUser(token).subscribe(
       () => {
-        console.log('User loaded');
+        // User loaded
       },
       (error) => {
         console.log(error);
@@ -39,7 +39,7 @@ export class AppRootComponent implements OnInit {
     if (basketId) {
       this.basketService.getBasket(basketId).subscribe(
         () => {
-          console.log('initialized basket');
+          // Initialized basket
         },
         (error) => {
           console.log(error);

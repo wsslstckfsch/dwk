@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import UIkit from 'uikit';
+import { Observable } from 'rxjs';
+import { IBasket } from '../../shared/models/basket';
+import { BasketService } from '../../basket/basket.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout-review',
@@ -8,9 +12,28 @@ import UIkit from 'uikit';
   styleUrls: ['./checkout-review.component.scss'],
 })
 export class CheckoutReviewComponent implements OnInit {
-  constructor() {}
+  basket$: Observable<IBasket>;
 
-  ngOnInit(): void {}
+  constructor(
+    private basketService: BasketService,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnInit(): void {
+    this.basket$ = this.basketService.basket$;
+  }
+
+  createPaymentIntent(): any {
+    return this.basketService.createPaymentIntent().subscribe(
+      (response: any) => {
+        // Payment intent created
+        this.switchTab(2);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   switchTab(index): void {
     UIkit.switcher('#switcher').show(index);

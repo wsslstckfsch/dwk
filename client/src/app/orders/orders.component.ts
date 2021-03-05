@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../shared/models/order';
 import { OrdersService } from './orders.service';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,7 +11,10 @@ import { OrdersService } from './orders.service';
 export class OrdersComponent implements OnInit {
   orders: IOrder[];
 
-  constructor(private ordersService: OrdersService) {}
+  constructor(
+    private ordersService: OrdersService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.getOrders();
@@ -25,5 +29,9 @@ export class OrdersComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  logout(): void {
+    this.accountService.logout();
   }
 }

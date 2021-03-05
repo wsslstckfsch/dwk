@@ -29,7 +29,7 @@
     <app-text-input [label]="'City'" formControlName="city"></app-text-input>
     <app-text-input [label]="'Zip'" formControlName="zip"></app-text-input>
     <div class="uk-margin">
-      <label class="uk-form-label">Country</label>
+      <label class="uk-form-label">Country {{ currentShippingValue }}</label>
       <div class="uk-form-controls">
         <select
           (change)="setShippingPrice(deliveryMethod.value)"
@@ -51,7 +51,11 @@
     <span uk-icon="icon: chevron-left"></span>
     <span>Back to basket</span>
   </button>
-  <button (click)="switchTab(1)" class="uk-button uk-button-default text-icon">
+  <button
+    (click)="switchTab(1)"
+    [disabled]="checkoutForm.get('shippingAddressForm').invalid"
+    class="uk-button uk-button-default text-icon"
+  >
     <span>Review</span>
     <span uk-icon="icon: chevron-right"></span>
   </button>

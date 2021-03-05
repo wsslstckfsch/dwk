@@ -1,0 +1,22 @@
+.stripe-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr 0.3fr;
+  gap: 0.4rem;
+
+  .StripeElement {
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 10px;
+    background: #fff;
+    color: #666;
+    border: 1px solid #e5e5e5;
+    transition: 0.2s ease-in-out;
+    transition-property: color, background-color, border;
+    height: 40px;
+    vertical-align: middle;
+
+    display: grid;
+    align-items: center;
+  }
+}

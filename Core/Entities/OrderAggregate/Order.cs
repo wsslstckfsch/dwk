@@ -6,13 +6,14 @@ namespace Core.Entities.OrderAggregate
   public class Order : BaseEntity
   {
     public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, ShippingAddress shippingAddress,
-      DeliveryMethod deliveryMethod, decimal subtotal)
+      DeliveryMethod deliveryMethod, decimal subtotal, string paymentIntentId)
     {
       OrderItems = orderItems;
       BuyerEmail = buyerEmail;
       ShippingAddress = shippingAddress;
       DeliveryMethod = deliveryMethod;
       Subtotal = subtotal;
+      PaymentIntentId = paymentIntentId;
     }
 
     public Order()

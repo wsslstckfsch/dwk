@@ -1,13 +1,19 @@
-<div>
-  <app-basket-summary [isBasket]="false"></app-basket-summary>
-</div>
+<ng-container *ngIf="(basket$ | async) && (basket$ | async).items">
+  <app-basket-summary
+    [isBasket]="false"
+    [items]="(basket$ | async).items"
+  ></app-basket-summary>
+</ng-container>
 
 <div class="cols-between">
   <button (click)="switchTab(0)" class="uk-button uk-button-default text-icon">
     <span uk-icon="icon: chevron-left"></span>
     <span>Addresses</span>
   </button>
-  <button (click)="switchTab(2)" class="uk-button uk-button-default text-icon">
+  <button
+    (click)="createPaymentIntent()"
+    class="uk-button uk-button-default text-icon"
+  >
     <span>Payment</span>
     <span uk-icon="icon: chevron-right"></span>
   </button>

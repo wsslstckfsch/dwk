@@ -7,6 +7,7 @@ import UIkit from 'uikit';
 import { AccountService } from '../../account/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
+import { IUserAddress } from '../../shared/models/userAddress';
 
 @Component({
   selector: 'app-checkout-addresses',
@@ -17,6 +18,8 @@ export class CheckoutAddressesComponent implements OnInit {
   @Input() checkoutForm: FormGroup;
   deliveryMethods: IDeliveryMethod[];
 
+  currentShippingValue: string;
+
   constructor(
     private checkoutService: CheckoutService,
     private accountService: AccountService,
@@ -25,9 +28,14 @@ export class CheckoutAddressesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentShippingValue = this.checkoutForm
+      .get('shippingAddressForm')
+      .get('country').value;
+
     this.checkoutService.getDeliveryMethods().subscribe(
       (dm: IDeliveryMethod[]) => {
         this.deliveryMethods = dm;
+        this.setShippingPrice(this.currentShippingValue);
       },
       (error) => {
         console.log(error);
@@ -41,21 +49,22 @@ export class CheckoutAddressesComponent implements OnInit {
         this.checkoutForm.get('shippingAddressForm').value
       )
       .subscribe(
-        () => {
+        (address: IUserAddress) => {
           this.toastr.success('Shipping address saved');
+          this.checkoutForm.get('shippingAddressForm').reset(address);
         },
         (error) => {
-          this.toastr.error(error.message);
           console.log(error);
         }
       );
   }
 
   setShippingPrice(deliveryMethodId: string): void {
+    // console.log('UPDATING SHIPPING PRICE', deliveryMethodId);
     const deliveryMethod = this.deliveryMethods.find(
       (item) => item.id.toString() === deliveryMethodId
     );
-    this.basketService.setShippingPrice(deliveryMethod.price);
+    this.basketService.setShippingPrice(deliveryMethod);
   }
 
   switchTab(index): void {
