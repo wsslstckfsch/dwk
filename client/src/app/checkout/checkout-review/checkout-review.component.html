@@ -3,6 +3,7 @@
     <app-basket-summary
       [isBasket]="false"
       [items]="(basket$ | async).items"
+      [locale]="locale"
     ></app-basket-summary>
   </ng-container>
 
@@ -12,13 +13,13 @@
       class="uk-button uk-button-default text-icon"
     >
       <span uk-icon="icon: chevron-left"></span>
-      <span>Shipping</span>
+      <span>{{ locale?.checkout?.to_shipping }}</span>
     </button>
     <button
       (click)="createPaymentIntent()"
       class="uk-button uk-button-default text-icon"
     >
-      <span>Payment</span>
+      <span>{{ locale?.checkout?.to_payment }}</span>
       <span uk-icon="icon: chevron-right"></span>
     </button>
   </div>

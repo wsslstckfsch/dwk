@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '../../shared/models/user';
 import { AccountService } from '../../account/account.service';
@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
   currentUser$: Observable<IUser>;
   onB2bPage: boolean;
   currentLang: string;
+
+  @Input() locale: any;
 
   constructor(
     private accountService: AccountService,

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IOrder } from '../../shared/models/order';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OrdersService } from '../orders.service';
+import { filter } from 'rxjs/operators';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-order-detailed',
@@ -10,11 +12,20 @@ import { OrdersService } from '../orders.service';
 })
 export class OrderDetailedComponent implements OnInit {
   order: IOrder;
+  locale: any;
 
   constructor(
     private route: ActivatedRoute,
-    private ordersService: OrdersService
-  ) {}
+    private ordersService: OrdersService,
+    private sharedService: SharedService,
+    private router: Router
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.locale = this.sharedService.getLocaleJson();
+      });
+  }
 
   ngOnInit(): void {
     this.ordersService

@@ -14,6 +14,7 @@ import { SharedService } from '../shared/shared.service';
 export class OrdersComponent implements OnInit {
   orders: IOrder[];
   currentLang: string;
+  locale: any;
 
   constructor(
     private ordersService: OrdersService,
@@ -25,6 +26,7 @@ export class OrdersComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
       });
   }
 

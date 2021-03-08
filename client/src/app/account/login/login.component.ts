@@ -6,9 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { AccountService } from '../account.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { of, timer } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   returnUrl: string;
-
   registerErrors: string[];
+  locale: any;
 
   constructor(
     private accountService: AccountService,
@@ -29,7 +29,13 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private sharedService: SharedService
-  ) {}
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.locale = this.sharedService.getLocaleJson();
+      });
+  }
 
   ngOnInit(): void {
     this.returnUrl =

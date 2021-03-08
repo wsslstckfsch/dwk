@@ -1,6 +1,6 @@
 <div [formGroup]="checkoutForm" class="checkout-page">
   <div class="cols-between">
-    <h4 class="uk-margin-remove-bottom">Billing</h4>
+    <h4 class="uk-margin-remove-bottom">{{ locale?.checkout?.tabs[0] }}</h4>
     <button
       (click)="saveUserBillingAddress()"
       [disabled]="
@@ -9,36 +9,39 @@
       "
       class="uk-button uk-button-default uk-button-small"
     >
-      Save as default address
+      {{ locale?.checkout?.save_address }}
     </button>
   </div>
 
   <div class="form" formGroupName="billingAddressForm">
     <app-text-input
-      [label]="'Full name'"
+      [label]="locale?.form?.full_name"
       formControlName="fullName"
     ></app-text-input>
-    <app-text-input [label]="'UID'" formControlName="uid"></app-text-input>
     <app-text-input
-      [label]="'Address line'"
+      [label]="locale?.form?.uid"
+      formControlName="uid"
+    ></app-text-input>
+    <app-text-input
+      [label]="locale?.form?.address_line"
       formControlName="addressLine1"
     ></app-text-input>
     <app-text-input
-      [label]="'Street address'"
+      [label]="locale?.form?.street"
       formControlName="streetAddress"
     ></app-text-input>
     <app-text-input
-      [label]="'City'"
+      [label]="locale?.form?.city"
       class="span-half"
       formControlName="city"
     ></app-text-input>
     <app-text-input
-      [label]="'Zip'"
+      [label]="locale?.form?.zip"
       class="span-half"
       formControlName="zip"
     ></app-text-input>
     <div>
-      <label class="uk-form-label">Country {{ currentBillingValue }}</label>
+      <label class="uk-form-label">{{ locale?.form?.country }}</label>
       <div class="uk-form-controls">
         <select #deliveryMethod class="uk-select" formControlName="country">
           <option *ngFor="let method of deliveryMethods" [value]="method.id">
@@ -55,14 +58,14 @@
       class="uk-button uk-button-default text-icon"
     >
       <span uk-icon="icon: chevron-left"></span>
-      <span>Back to basket</span>
+      <span>{{ locale?.checkout?.back_to_basket }}</span>
     </button>
     <button
       (click)="switchTab(1)"
       [disabled]="checkoutForm.get('billingAddressForm').invalid"
       class="uk-button uk-button-default text-icon"
     >
-      <span>Shipping</span>
+      <span>{{ locale?.checkout?.to_shipping }}</span>
       <span uk-icon="icon: chevron-right"></span>
     </button>
   </div>

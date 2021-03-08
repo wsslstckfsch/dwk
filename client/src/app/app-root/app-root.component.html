@@ -2,7 +2,7 @@
 
 <div class="app__container">
   <div class="app__navbar">
-    <app-navbar></app-navbar>
+    <app-navbar [locale]="locale"></app-navbar>
   </div>
 
   <div class="app__outlet">
@@ -13,7 +13,13 @@
 
   <footer class="app__footer">
     <div class="container">
-      <div>Impressum</div>
+      <div>
+        {{ locale?.imprint?.part_1 }}
+        <a [href]="'mailto:' + locale?.imprint?.email" target="_top">{{
+          locale?.imprint?.email
+        }}</a>
+        {{ locale?.imprint?.part_2 }}
+      </div>
     </div>
   </footer>
 </div>

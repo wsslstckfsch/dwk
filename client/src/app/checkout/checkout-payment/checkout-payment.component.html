@@ -3,7 +3,7 @@
     <div class="form">
       <div formGroupName="paymentForm">
         <app-text-input
-          [label]="'Name on card'"
+          [label]="locale?.payment?.credit_card_name"
           formControlName="nameOnCard"
         ></app-text-input>
       </div>
@@ -24,7 +24,7 @@
       class="uk-button uk-button-default text-icon"
     >
       <span uk-icon="icon: chevron-left"></span>
-      <span>Review</span>
+      <span>{{ locale?.checkout?.to_review }}</span>
     </button>
     <button
       (click)="submitOrder()"
@@ -37,7 +37,7 @@
       "
       class="uk-button uk-button-default text-icon"
     >
-      <span>Submit order</span>
+      <span>{{ locale?.checkout?.submit_order }}</span>
 
       <ng-container *ngIf="!loading">
         <span uk-icon="icon: chevron-right"></span>

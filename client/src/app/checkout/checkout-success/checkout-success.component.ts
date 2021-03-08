@@ -12,12 +12,14 @@ import { SharedService } from '../../shared/shared.service';
 export class CheckoutSuccessComponent implements OnInit {
   order: IOrder;
   currentLang: string;
+  locale: any;
 
   constructor(private router: Router, private sharedService: SharedService) {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
       });
     const navigation = this.router.getCurrentNavigation();
     const state = navigation && navigation.extras && navigation.extras.state;

@@ -3,16 +3,42 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { last } from 'rxjs/operators';
 
+declare var require: any;
+
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
   langs = ['de', 'en', 'es', 'ru', 'jp'];
-  currentLang: string;
   private currentLangSource = new BehaviorSubject<string>(null);
   currentLang$ = this.currentLangSource.asObservable();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  getLocaleJson(): any {
+    const currentLang = this.checkLang();
+    let locale;
+    switch (currentLang) {
+      case 'de':
+        locale = require('src/assets/json/de.json');
+        break;
+      case 'en':
+        locale = require('src/assets/json/en.json');
+        break;
+      case 'es':
+        locale = require('src/assets/json/es.json');
+        break;
+      case 'ru':
+        locale = require('src/assets/json/ru.json');
+        break;
+      case 'jp':
+        locale = require('src/assets/json/jp.json');
+        break;
+      default:
+        break;
+    }
+    return locale;
+  }
 
   checkLang(): string {
     const urlArray = this.router.url.split('/');
@@ -25,7 +51,6 @@ export class SharedService {
     urlArray.shift();
     const firstItem = urlArray[0];
     if (this.langs.includes(firstItem)) {
-      this.currentLang = firstItem;
     } else {
       let browserLang = navigator.language;
       if (browserLang.indexOf('-') > -1) {
@@ -35,7 +60,6 @@ export class SharedService {
       if (this.langs.includes(browserLang)) {
         newLang = browserLang;
       }
-      this.currentLang = newLang;
       urlArray.unshift(newLang);
       const newUrl = urlArray.join('/');
       this.router.navigateByUrl(newUrl);

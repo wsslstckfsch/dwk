@@ -9,6 +9,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./shop-intro.component.scss'],
 })
 export class ShopIntroComponent implements OnInit {
+  locale: any;
   currentLang: string;
 
   constructor(private sharedService: SharedService, private router: Router) {
@@ -16,6 +17,7 @@ export class ShopIntroComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
       });
   }
 

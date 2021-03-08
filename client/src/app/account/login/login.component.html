@@ -1,15 +1,15 @@
 <ng-container>
   <div class="login-grid">
     <div>
-      <h2>Login</h2>
+      <h2>{{ locale?.account?.login?.header }}</h2>
 
       <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="form">
         <app-text-input
-          [label]="'Email address'"
+          [label]="locale?.form?.email"
           formControlName="email"
         ></app-text-input>
         <app-text-input
-          [label]="'Password'"
+          [label]="locale?.form?.password"
           [type]="'password'"
           formControlName="password"
         ></app-text-input>
@@ -19,7 +19,7 @@
             [disabled]="loginForm.invalid"
             class="uk-button uk-button-primary"
           >
-            Login
+            {{ locale?.account?.login?.btn }}
           </button>
         </div>
       </form>
@@ -28,7 +28,7 @@
     <div class="login-grid__divider"></div>
 
     <div>
-      <h2>Register</h2>
+      <h2>{{ locale?.account?.register?.header }}</h2>
 
       <ul *ngIf="registerErrors" class="uk-list">
         <li *ngFor="let error of registerErrors">{{ error }}</li>
@@ -36,11 +36,11 @@
 
       <form (ngSubmit)="onRegister()" [formGroup]="registerForm" class="form">
         <app-text-input
-          [label]="'Email address'"
+          [label]="locale?.form?.email"
           formControlName="email"
         ></app-text-input>
         <app-text-input
-          [label]="'Password'"
+          [label]="locale?.form?.password"
           [type]="'password'"
           formControlName="password"
         ></app-text-input>
@@ -50,7 +50,7 @@
             [disabled]="registerForm.invalid"
             class="uk-button uk-button-primary"
           >
-            Login
+            {{ locale?.account?.register?.btn }}
           </button>
         </div>
       </form>

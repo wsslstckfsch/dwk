@@ -1,23 +1,25 @@
 <ng-container>
-  <h3>Order summary</h3>
-  <p><em>Shipping costs will be added later during checkout</em></p>
+  <h3>{{ locale?.order_sum?.header }}</h3>
+  <p>
+    <em>{{ locale?.order_sum?.shipping_disclaimer }}</em>
+  </p>
   <table class="uk-table uk-table-divider">
     <tbody>
       <tr>
-        <td>Subtotal</td>
+        <td>{{ locale?.order_sum?.subtotal }}</td>
         <td>
           <strong>{{ subtotal | currency: "EUR":"symbol" }}</strong>
         </td>
       </tr>
       <tr>
-        <td>Shipping</td>
+        <td>{{ locale?.order_sum?.shipping }}</td>
         <td>
           <strong>{{ shippingPrice | currency: "EUR":"symbol" }} </strong>
         </td>
       </tr>
       <tr></tr>
       <tr>
-        <td>Total</td>
+        <td>{{ locale?.order_sum?.total }}</td>
         <td>
           <strong>{{ total | currency: "EUR":"symbol" }}</strong>
         </td>

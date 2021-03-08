@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import UIkit from 'uikit';
 import { Observable } from 'rxjs';
 import { IBasket } from '../../shared/models/basket';
 import { BasketService } from '../../basket/basket.service';
 import { ToastrService } from 'ngx-toastr';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-checkout-review',
@@ -13,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CheckoutReviewComponent implements OnInit {
   basket$: Observable<IBasket>;
+  @Input() locale: any;
 
   constructor(
     private basketService: BasketService,

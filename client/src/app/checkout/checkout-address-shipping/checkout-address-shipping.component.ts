@@ -17,9 +17,9 @@ import UIkit from 'uikit';
 export class CheckoutAddressShippingComponent implements OnInit {
   @Input() checkoutForm: FormGroup;
   deliveryMethods: IDeliveryMethod[];
-
   shippingIsBilling: boolean;
   currentShippingValue: string;
+  @Input() locale: any;
 
   constructor(
     private checkoutService: CheckoutService,

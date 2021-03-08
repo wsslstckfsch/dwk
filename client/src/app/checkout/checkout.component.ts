@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../account/account.service';
 import { Observable } from 'rxjs';
 import { IBasketTotals } from '../shared/models/basket';
 import { BasketService } from '../basket/basket.service';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,12 +16,21 @@ import { BasketService } from '../basket/basket.service';
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   basketTotals$: Observable<IBasketTotals>;
+  locale: any;
 
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
-    private basketService: BasketService
-  ) {}
+    private basketService: BasketService,
+    private sharedService: SharedService,
+    private router: Router
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.locale = this.sharedService.getLocaleJson();
+      });
+  }
 
   ngOnInit(): void {
     this.createCheckoutForm();

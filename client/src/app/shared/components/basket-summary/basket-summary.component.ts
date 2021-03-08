@@ -21,6 +21,7 @@ export class BasketSummaryComponent implements OnInit {
   @Input() isOrder = false;
   onB2bPage: boolean;
   currentLang: string;
+  @Input() locale: any;
 
   constructor(private sharedService: SharedService, private router: Router) {
     router.events

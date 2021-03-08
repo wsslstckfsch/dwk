@@ -41,6 +41,7 @@ export class CheckoutPaymentComponent
   cardNumberValid = false;
   cardExpiryValid = false;
   cardCvcValid = false;
+  @Input() locale: any;
 
   constructor(
     private basketService: BasketService,

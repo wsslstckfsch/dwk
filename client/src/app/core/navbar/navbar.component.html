@@ -17,7 +17,7 @@
         [routerLink]="'/' + currentLang + (onB2bPage ? '/wdv/shop' : '/shop')"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
-        >SHOP</a
+        >{{ locale?.navbar?.links?.shop }}</a
       >
     </li>
     <li></li>
@@ -28,7 +28,7 @@
         "
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
-        >WARENKORB</a
+        >{{ locale?.navbar?.links?.cart }}</a
       >
     </li>
     <li></li>
@@ -47,40 +47,40 @@
         "
         [routerLinkActiveOptions]="{ exact: false }"
         routerLinkActive="active"
-        >ACCOUNT</a
+        >{{ locale?.navbar?.links?.account }}</a
       >
     </li>
   </ul>
 
   <ul class="navbar__list">
     <li>
-      <a (click)="changeLang('de')" [class.active]="currentLang === 'de'"
-        >DEUTSCH</a
-      >
+      <a (click)="changeLang('de')" [class.active]="currentLang === 'de'">{{
+        locale?.navbar?.langs?.de
+      }}</a>
     </li>
     <li></li>
     <li>
-      <a (click)="changeLang('en')" [class.active]="currentLang === 'en'"
-        >ENGLISCH</a
-      >
+      <a (click)="changeLang('en')" [class.active]="currentLang === 'en'">{{
+        locale?.navbar?.langs?.en
+      }}</a>
     </li>
     <li></li>
     <li>
-      <a (click)="changeLang('es')" [class.active]="currentLang === 'es'"
-        >SPANISCH</a
-      >
+      <a (click)="changeLang('es')" [class.active]="currentLang === 'es'">{{
+        locale?.navbar?.langs?.es
+      }}</a>
     </li>
     <li></li>
     <li>
-      <a (click)="changeLang('ru')" [class.active]="currentLang === 'ru'"
-        >RUSSISCH</a
-      >
+      <a (click)="changeLang('ru')" [class.active]="currentLang === 'ru'">{{
+        locale?.navbar?.langs?.ru
+      }}</a>
     </li>
     <li></li>
     <li>
-      <a (click)="changeLang('jp')" [class.active]="currentLang === 'jp'"
-        >JAPANISCH</a
-      >
+      <a (click)="changeLang('jp')" [class.active]="currentLang === 'jp'">{{
+        locale?.navbar?.langs?.jp
+      }}</a>
     </li>
   </ul>
 </nav>

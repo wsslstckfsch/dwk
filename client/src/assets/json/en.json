@@ -50,7 +50,9 @@
     "product": "Product",
     "price": "Price",
     "quantity": "Quantity",
-    "total": "Total"
+    "total": "Total",
+    "no_items_header": "No items in basket",
+    "back_to_shop": "Back to shop"
   },
   "order_sum": {
     "header": "Order summary",
@@ -61,6 +63,7 @@
     "proceed_to_checkout": "Proceed to checkout"
   },
   "checkout": {
+    "header": "Checkout",
     "tabs": ["Billing", "Shipping", "Review", "Payment"],
     "back_to_basket": "Back to basket",
     "to_shipping": "To shipping",
@@ -72,11 +75,12 @@
     "save_address": "Save as default"
   },
   "payment": {
-    "credit_card_name": ""
+    "credit_card_name": "Name on card"
   },
   "payment_success": {
     "header": "Thank you for your order",
-    "view_order": "View your order"
+    "view_order": "View your order",
+    "view_orders": "View your orders"
   },
   "order": {
     "order_id": "ID",
@@ -87,14 +91,14 @@
   "account": {
     "logout": "Logout",
     "login": {
-      "header": "",
+      "header": "Login",
       "par": "",
-      "submit": ""
+      "btn": "Login"
     },
     "register": {
-      "header": "",
+      "header": "Register",
       "par": "",
-      "submit": ""
+      "btn": "Register"
     }
   },
   "form": {
@@ -110,7 +114,7 @@
   },
   "imprint": {
     "part_1": "IMRESSUM: Ed Tötzl & Michael Patocka, 1010 Vienna, Börsegasse 9, ",
-    "link_html": "<a href=\"mailto:ed@thedirty12.at\" target=\"_top\">ed@thedirty12.at</a>",
+    "email": "ed@thedirty12.at",
     "part_2": ", ISBN: 978-3-9519859-5-4"
   }
 }

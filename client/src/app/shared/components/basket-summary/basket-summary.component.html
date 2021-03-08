@@ -2,10 +2,10 @@
   <table class="uk-table">
     <thead>
       <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th *ngIf="!isBasket">Quantity</th>
-        <th>Total</th>
+        <th>{{ locale?.cart?.product }}</th>
+        <th>{{ locale?.cart?.price }}</th>
+        <th *ngIf="!isBasket">{{ locale?.cart?.quantity }}</th>
+        <th>{{ locale?.cart?.total }}</th>
         <th *ngIf="isBasket"></th>
       </tr>
     </thead>

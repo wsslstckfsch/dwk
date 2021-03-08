@@ -1,18 +1,18 @@
 <div>
-  <h2>Thank you for your order</h2>
+  <h2>{{ locale?.payment_success?.header }}</h2>
 
   <button
     *ngIf="order"
     [routerLink]="'/' + currentLang + ('/orders/' + order?.id)"
     class="uk-button uk-button-default"
   >
-    View your order
+    {{ locale?.payment_success?.view_order }}
   </button>
   <button
     *ngIf="!order"
     [routerLink]="'/' + currentLang + '/orders'"
     class="uk-button uk-button-default"
   >
-    View your orders
+    {{ locale?.payment_success?.view_orders }}
   </button>
 </div>

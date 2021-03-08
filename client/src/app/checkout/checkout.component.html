@@ -1,6 +1,6 @@
 <ng-container>
   <div>
-    <h2>Checkout</h2>
+    <h2>{{ locale?.checkout?.header }}</h2>
 
     <div class="checkout-grid">
       <div>
@@ -9,29 +9,40 @@
           id="switcher"
           uk-switcher="animation: uk-animation-fade"
         >
-          <li><a href="#">Billing</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Review</a></li>
-          <li><a href="#">Payment</a></li>
+          <li>
+            <a href="#">{{ locale?.checkout?.tabs[0] }}</a>
+          </li>
+          <li>
+            <a href="#">{{ locale?.checkout?.tabs[1] }}</a>
+          </li>
+          <li>
+            <a href="#">{{ locale?.checkout?.tabs[2] }}</a>
+          </li>
+          <li>
+            <a href="#">{{ locale?.checkout?.tabs[3] }}</a>
+          </li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
           <li>
             <app-checkout-address-billing
               [checkoutForm]="checkoutForm"
+              [locale]="locale"
             ></app-checkout-address-billing>
           </li>
           <li>
             <app-checkout-address-shipping
               [checkoutForm]="checkoutForm"
+              [locale]="locale"
             ></app-checkout-address-shipping>
           </li>
           <li>
-            <app-checkout-review></app-checkout-review>
+            <app-checkout-review [locale]="locale"></app-checkout-review>
           </li>
           <li>
             <app-checkout-payment
               [checkoutForm]="checkoutForm"
+              [locale]="locale"
             ></app-checkout-payment>
           </li>
         </ul>
@@ -42,6 +53,7 @@
         [shippingPrice]="totals.shipping"
         [subtotal]="totals.subtotal"
         [total]="totals.total"
+        [locale]="locale"
       ></app-order-totals>
     </div>
   </div>

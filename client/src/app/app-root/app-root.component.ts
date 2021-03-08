@@ -17,6 +17,7 @@ export class AppRootComponent implements OnInit {
   onB2bPage: boolean;
   langs = ['de', 'en', 'es', 'ru', 'jp'];
   currentLang: string;
+  locale: any;
 
   constructor(
     private basketService: BasketService,
@@ -29,8 +30,9 @@ export class AppRootComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.sharedService.handleInitialLangRedirect();
-        this.currentLang = this.sharedService.checkLang();
         this.onB2bPage = this.sharedService.onB2bPage();
+        this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
       });
   }
 

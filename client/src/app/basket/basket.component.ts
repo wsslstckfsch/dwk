@@ -16,6 +16,7 @@ export class BasketComponent implements OnInit {
   basketTotals$: Observable<IBasketTotals>;
   onB2bPage: boolean;
   currentLang: string;
+  locale: any;
 
   constructor(
     private basketService: BasketService,
@@ -25,8 +26,9 @@ export class BasketComponent implements OnInit {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.currentLang = this.sharedService.checkLang();
         this.onB2bPage = this.sharedService.onB2bPage();
+        this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
       });
   }
 

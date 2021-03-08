@@ -26,6 +26,7 @@ export class ShopComponent implements OnInit {
   ];
   onB2bPage: boolean;
   currentLang: string;
+  locale: any;
 
   constructor(
     private shopService: ShopService,
@@ -38,6 +39,7 @@ export class ShopComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentLang = this.sharedService.checkLang();
+        this.locale = this.sharedService.getLocaleJson();
         this.onB2bPage = this.sharedService.onB2bPage();
         this.shopParams = this.shopService.getShopParams();
         this.getProducts(true);

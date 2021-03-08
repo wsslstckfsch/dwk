@@ -22,6 +22,7 @@
     list-style: none;
     gap: 0.5rem;
     place-items: center;
+    text-transform: uppercase;
 
     &:last-child {
       @include media("<m") {

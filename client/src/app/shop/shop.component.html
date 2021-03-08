@@ -31,10 +31,10 @@
         />
       </div>
       <button (click)="onSearch()" class="uk-button uk-button-primary">
-        Suchen
+        {{ locale?.shop?.filters?.search }}
       </button>
       <button (click)="onReset()" class="uk-button uk-button-secondary">
-        Reset
+        {{ locale?.shop?.filters?.reset }}
       </button>
     </div>
   </div>

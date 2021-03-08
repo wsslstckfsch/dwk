@@ -22,8 +22,8 @@ export class CheckoutAddressBillingComponent implements OnInit {
   deliveryMethods: IDeliveryMethod[];
   onB2bPage: boolean;
   currentLang: string;
-
   currentBillingValue: string;
+  @Input() locale: any;
 
   constructor(
     private checkoutService: CheckoutService,
