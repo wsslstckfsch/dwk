@@ -13,7 +13,10 @@ dotnet watch run -p API
 # Run API, create databases, apply migrations and seed data:
 dotnet watch run -p API
 
-# Inspect databases:çzxcjhvgú"ð§A:I!W%EQ[]
+# Inspect databases:
+http://localhost:8080/?pgsql=db&username=appuser
+password: secret
+
 # Inspect Redis data:
 http://127.0.0.1:8081/
 username: root
