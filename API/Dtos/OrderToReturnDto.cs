@@ -11,6 +11,7 @@ namespace API.Dtos
     public string BuyerEmail { get; set; }
     public DateTimeOffset OrderDate { get; set; }
     public ShippingAddress ShippingAddress { get; set; }
+    public BillingAddress BillingAddress { get; set; }
     public string DeliveryMethod { get; set; }
     public decimal ShippingPrice { get; set; }
     public decimal Subtotal { get; set; }

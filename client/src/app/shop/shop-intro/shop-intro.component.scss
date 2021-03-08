@@ -1,0 +1,52 @@
+@import "src/styles/presets";
+
+.intro {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  @include media(">m") {
+    gap: 2rem;
+  }
+
+  &__one {
+  }
+
+  &__two {
+    display: grid;
+    align-items: center;
+    gap: 1rem;
+    @include media(">m") {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  &__three {
+  }
+
+  &__four {
+    text-align: center;
+  }
+
+  &__five {
+  }
+
+  &__one,
+  &__three,
+  &__five {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .text {
+    display: grid;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+}

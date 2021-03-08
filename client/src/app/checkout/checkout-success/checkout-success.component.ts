@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { IOrder } from '../../shared/models/order';
+import { filter } from 'rxjs/operators';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-checkout-success',
@@ -9,8 +11,14 @@ import { IOrder } from '../../shared/models/order';
 })
 export class CheckoutSuccessComponent implements OnInit {
   order: IOrder;
+  currentLang: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private sharedService: SharedService) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentLang = this.sharedService.checkLang();
+      });
     const navigation = this.router.getCurrentNavigation();
     const state = navigation && navigation.extras && navigation.extras.state;
     if (state) {

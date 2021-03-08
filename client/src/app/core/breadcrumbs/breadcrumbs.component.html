@@ -1,5 +1,10 @@
-<ng-container *ngIf="(breadcrumb$ | async) as breadcrumbs">
-  <div *ngIf="breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length - 1].label !== 'Home'" class="uk-container">
+<ng-container *ngIf="breadcrumb$ | async as breadcrumbs">
+  <div
+    *ngIf="
+      breadcrumbs.length > 0 &&
+      breadcrumbs[breadcrumbs.length - 1].label !== 'Home'
+    "
+  >
     <xng-breadcrumb></xng-breadcrumb>
   </div>
 </ng-container>

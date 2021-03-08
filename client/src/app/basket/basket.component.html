@@ -1,7 +1,10 @@
-<div class="uk-container uk-margin-top">
+<div>
   <ng-container *ngIf="(basket$ | async) === null">
     <h2>No items in basket</h2>
-    <button routerLink="/shop" class="uk-button uk-button-default text-icon">
+    <button
+      [routerLink]="'/' + currentLang + (onB2bPage ? '/wdv/shop' : '/shop')"
+      class="uk-button uk-button-default text-icon"
+    >
       <span uk-icon="icon: cart"></span>
       <span>Back to Shop</span>
     </button>
@@ -18,16 +21,21 @@
         ></app-basket-summary>
       </div>
 
-      <app-order-totals
-        *ngIf="basketTotals$ | async as totals"
-        [shippingPrice]="totals.shipping"
-        [subtotal]="totals.subtotal"
-        [total]="totals.total"
-      ></app-order-totals>
+      <div>
+        <app-order-totals
+          *ngIf="basketTotals$ | async as totals"
+          [shippingPrice]="totals.shipping"
+          [subtotal]="totals.subtotal"
+          [total]="totals.total"
+        ></app-order-totals>
+        <a
+          [routerLink]="
+            '/' + currentLang + (onB2bPage ? '/wdv/checkout' : '/checkout')
+          "
+          class="uk-button uk-button-primary"
+          >Proceed to checkout</a
+        >
+      </div>
     </div>
-
-    <a class="uk-button uk-button-primary" routerLink="/checkout"
-      >Proceed to checkout</a
-    >
   </ng-container>
 </div>

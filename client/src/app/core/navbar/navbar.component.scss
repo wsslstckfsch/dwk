@@ -41,14 +41,16 @@
         height: 8px;
         width: 8px;
       }
+    }
 
+    > li {
       a {
         color: black;
         font-weight: 500;
 
         &.active {
-          color: dodgerblue;
-          text-decoration: underline;
+          color: $orange-600;
+          font-weight: 600;
         }
       }
     }

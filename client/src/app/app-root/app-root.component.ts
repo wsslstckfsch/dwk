@@ -3,6 +3,9 @@ import { BasketService } from '../basket/basket.service';
 import { Observable } from 'rxjs';
 import { IBasket } from '../shared/models/basket';
 import { AccountService } from '../account/account.service';
+import { SharedService } from '../shared/shared.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +14,25 @@ import { AccountService } from '../account/account.service';
 })
 export class AppRootComponent implements OnInit {
   basket$: Observable<IBasket>;
+  onB2bPage: boolean;
+  langs = ['de', 'en', 'es', 'ru', 'jp'];
+  currentLang: string;
 
   constructor(
     private basketService: BasketService,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private sharedService: SharedService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.sharedService.handleInitialLangRedirect();
+        this.currentLang = this.sharedService.checkLang();
+        this.onB2bPage = this.sharedService.onB2bPage();
+      });
+  }
 
   ngOnInit(): void {
     this.loadBasket();
@@ -29,7 +46,7 @@ export class AppRootComponent implements OnInit {
         // User loaded
       },
       (error) => {
-        console.log(error);
+        console.log('No user', error);
       }
     );
   }
@@ -42,7 +59,7 @@ export class AppRootComponent implements OnInit {
           // Initialized basket
         },
         (error) => {
-          console.log(error);
+          console.log('No basket', error);
         }
       );
     }

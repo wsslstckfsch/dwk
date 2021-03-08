@@ -30,7 +30,7 @@ namespace API.Controllers
     public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
       [FromQuery] ProductSpecParams productParams)
     {
-      var spec = new ProductWithTypeAndImagesSpec(productParams);
+      var spec = new ProductWithTypeSpec(productParams);
       var countSpec = new ProductWithFiltersForCountSpec(productParams);
       var totalItems = await _productRepo.CountAsync(countSpec);
       var products = await _productRepo.GetAllWithSpecAsync(spec);
@@ -43,7 +43,7 @@ namespace API.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
     {
-      var spec = new ProductWithTypeAndImagesSpec(id);
+      var spec = new ProductWithTypeSpec(id);
       var product = await _productRepo.GetEntityWithSpecAsync(spec);
       if (product == null) return NotFound(new ApiResponse(404));
 

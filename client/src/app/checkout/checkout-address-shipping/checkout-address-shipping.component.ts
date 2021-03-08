@@ -1,23 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CheckoutService } from '../checkout.service';
 import { IDeliveryMethod } from '../../shared/models/deliveryMethod';
-
-import UIkit from 'uikit';
+import { CheckoutService } from '../checkout.service';
 import { AccountService } from '../../account/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
-import { IUserAddress } from '../../shared/models/userAddress';
+import { IUserShippingAddress } from '../../shared/models/userShippingAddress';
+
+import UIkit from 'uikit';
 
 @Component({
-  selector: 'app-checkout-addresses',
-  templateUrl: './checkout-addresses.component.html',
-  styleUrls: ['./checkout-addresses.component.scss'],
+  selector: 'app-checkout-address-shipping',
+  templateUrl: './checkout-address-shipping.component.html',
+  styleUrls: ['./checkout-address-shipping.component.scss'],
 })
-export class CheckoutAddressesComponent implements OnInit {
+export class CheckoutAddressShippingComponent implements OnInit {
   @Input() checkoutForm: FormGroup;
   deliveryMethods: IDeliveryMethod[];
 
+  shippingIsBilling: boolean;
   currentShippingValue: string;
 
   constructor(
@@ -43,13 +44,24 @@ export class CheckoutAddressesComponent implements OnInit {
     );
   }
 
+  patchShippingValues(): void {
+    if (this.shippingIsBilling) {
+      const billingValues = this.checkoutForm.get('billingAddressForm').value;
+      this.checkoutForm.get('shippingAddressForm').patchValue(billingValues);
+      const shippingValue = this.checkoutForm
+        .get('billingAddressForm')
+        .get('country').value;
+      this.setShippingPrice(shippingValue);
+    }
+  }
+
   saveUserShippingAddress(): void {
     this.accountService
       .updateUserShippingAddress(
         this.checkoutForm.get('shippingAddressForm').value
       )
       .subscribe(
-        (address: IUserAddress) => {
+        (address: IUserShippingAddress) => {
           this.toastr.success('Shipping address saved');
           this.checkoutForm.get('shippingAddressForm').reset(address);
         },

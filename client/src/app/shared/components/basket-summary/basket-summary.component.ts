@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BasketService } from '../../../basket/basket.service';
-import { Observable } from 'rxjs';
-import { IBasket, IBasketItem } from '../../models/basket';
+import { IBasketItem } from '../../models/basket';
 import { IOrderItem } from '../../models/order';
+import { SharedService } from '../../shared.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basket-summary',
@@ -18,10 +19,22 @@ export class BasketSummaryComponent implements OnInit {
   @Input() isBasket = true;
   @Input() items: IBasketItem[] | IOrderItem[] = [];
   @Input() isOrder = false;
+  onB2bPage: boolean;
+  currentLang: string;
 
-  constructor() {}
+  constructor(private sharedService: SharedService, private router: Router) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentLang = this.sharedService.checkLang();
+        this.onB2bPage = this.sharedService.onB2bPage();
+      });
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onB2bPage = this.sharedService.onB2bPage();
+    this.currentLang = this.sharedService.checkLang();
+  }
 
   removeBasketItem(item: IBasketItem): void {
     this.remove.emit(item);

@@ -22,6 +22,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCheckoutForm();
+    this.getBillingAddressFormValues();
     this.getShippingAddressFormValues();
     this.getDeliveryMethodValue();
     this.basketTotals$ = this.basketService.basketTotal$;
@@ -29,6 +30,15 @@ export class CheckoutComponent implements OnInit {
 
   createCheckoutForm(): void {
     this.checkoutForm = this.fb.group({
+      billingAddressForm: this.fb.group({
+        fullName: [null, Validators.required],
+        uid: [null, []],
+        addressLine1: [null, []],
+        streetAddress: [null, Validators.required],
+        city: [null, Validators.required],
+        zip: [null, Validators.required],
+        country: [null, Validators.required],
+      }),
       shippingAddressForm: this.fb.group({
         fullName: [null, Validators.required],
         addressLine1: [null, []],
@@ -48,6 +58,21 @@ export class CheckoutComponent implements OnInit {
       (address) => {
         if (address) {
           this.checkoutForm.get('shippingAddressForm').patchValue(address);
+          // console.log('shipping', address);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getBillingAddressFormValues(): void {
+    this.accountService.getUserBillingAddress().subscribe(
+      (address) => {
+        if (address) {
+          this.checkoutForm.get('billingAddressForm').patchValue(address);
+          // console.log('billing', address);
         }
       },
       (error) => {

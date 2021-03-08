@@ -15,6 +15,7 @@ namespace API.Extensions
 
       return await input.Users
         .Include(x => x.ShippingAddress)
+        .Include(x => x.BillingAddress)
         .SingleOrDefaultAsync(x => x.Email == email);
     }
 

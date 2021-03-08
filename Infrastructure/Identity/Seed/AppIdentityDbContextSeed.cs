@@ -16,7 +16,7 @@ namespace Infrastructure.Identity.Seed
           DisplayName = "Bob",
           Email = "bob@test.com",
           UserName = "bob@test.com",
-          ShippingAddress = new ShippingAddress
+          BillingAddress = new BillingAddress
           {
             FullName = "Bob Bobbity",
             StreetAddress = "10 The Street",

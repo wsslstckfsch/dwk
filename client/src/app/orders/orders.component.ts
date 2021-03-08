@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../shared/models/order';
 import { OrdersService } from './orders.service';
 import { AccountService } from '../account/account.service';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,11 +13,20 @@ import { AccountService } from '../account/account.service';
 })
 export class OrdersComponent implements OnInit {
   orders: IOrder[];
+  currentLang: string;
 
   constructor(
     private ordersService: OrdersService,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private sharedService: SharedService,
+    private router: Router
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentLang = this.sharedService.checkLang();
+      });
+  }
 
   ngOnInit(): void {
     this.getOrders();

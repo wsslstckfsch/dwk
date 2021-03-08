@@ -17,5 +17,6 @@ namespace API.Dtos
 
     [Required] public string ImageUrl { get; set; }
     [Required] public string ProductType { get; set; }
+    [Required] public bool B2bPrice { get; set; }
   }
 }

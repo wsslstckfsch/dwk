@@ -1,0 +1,116 @@
+{
+  "navbar": {
+    "links": {
+      "shop": "Shop",
+      "cart": "Cart",
+      "account": "Account",
+      "checkout": "Checkout"
+    },
+    "langs": {
+      "de": "German",
+      "en": "English",
+      "es": "Spanish",
+      "ru": "Russian",
+      "jp": "Japanese"
+    }
+  },
+  "shop": {
+    "intro": {
+      "one": {
+        "header": "DIE WIENER KÜCHE",
+        "par": "Cooked, photographed and written in Vienna by Ed Tötzl and the elite troop from Naschmarkt"
+      },
+      "two": {
+        "header": "THE VIENNA KITCHEN IS THE ONLY KITCHEN IN THE WORLD THAT'S NAMED AFTER ITS CITY!",
+        "par": "In the multi-ethnic state of the monarchy, people came for centuries from all over the world to Vienna and have brought their greatest treasure with them: YOUR RECIPES!"
+      },
+      "three": {
+        "par_1": "And we have prepared these recipes for you in such a way that EVERYONE can cook them! But just turn the pages yourself and let yourself be convinced.",
+        "par_2": "We have prepared these recipes for you in such a way that EVERYONE can cook them! But just leaf through it yourself and let yourself be convinced"
+      },
+      "four": {
+        "header": "Leaf through"
+      },
+      "five": {
+        "header": "DIE WIENER KÜCHE",
+        "par_1": "As you can see when leafing through, every single step in our recipes is explained in detail in pictures and text and supplemented with practical tips!",
+        "par_2": "And the photos show you exactly what then in your kitchen in the pot or on the plate!"
+      }
+    },
+    "filters": {
+      "alphabetical": "Alphabetical",
+      "price_asc": "Price asc",
+      "price_desc": "Price desc",
+      "all_books": "All books",
+      "search": "Search",
+      "reset": "Reset"
+    }
+  },
+  "cart": {
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total"
+  },
+  "order_sum": {
+    "header": "Order summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_disclaimer": "Shipping costs will be added later during checkout\n\n",
+    "total": "Total",
+    "proceed_to_checkout": "Proceed to checkout"
+  },
+  "checkout": {
+    "tabs": ["Billing", "Shipping", "Review", "Payment"],
+    "back_to_basket": "Back to basket",
+    "to_shipping": "To shipping",
+    "to_billing": "To billing",
+    "to_review": "To review",
+    "to_payment": "To payment",
+    "submit_order": "Submit order",
+    "shipping_is_billing": "Shipping is same as billing",
+    "save_address": "Save as default"
+  },
+  "payment": {
+    "credit_card_name": ""
+  },
+  "payment_success": {
+    "header": "Thank you for your order",
+    "view_order": "View your order"
+  },
+  "order": {
+    "order_id": "ID",
+    "date": "Date",
+    "total": "Total",
+    "status": "Status"
+  },
+  "account": {
+    "logout": "Logout",
+    "login": {
+      "header": "",
+      "par": "",
+      "submit": ""
+    },
+    "register": {
+      "header": "",
+      "par": "",
+      "submit": ""
+    }
+  },
+  "form": {
+    "full_name": "Full name",
+    "uid": "UID",
+    "address_line": "Address line",
+    "street": "Street address",
+    "city": "City",
+    "zip": "Postal code",
+    "country": "Country",
+    "email": "Email address",
+    "password": "Password"
+  },
+  "imprint": {
+    "part_1": "IMRESSUM: Ed Tötzl & Michael Patocka, 1010 Vienna, Börsegasse 9, ",
+    "link_html": "<a href=\"mailto:ed@thedirty12.at\" target=\"_top\">ed@thedirty12.at</a>",
+    "part_2": ", ISBN: 978-3-9519859-5-4"
+  }
+}

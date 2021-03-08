@@ -14,12 +14,12 @@ namespace API.Helpers
           o => o.MapFrom(s => s.ProductType.Name))
         .ForMember(d => d.ImageUrl,
           o => o.MapFrom<ProductImageUrlResolver>());
-
-      CreateMap<ProductImage, ProductImageToReturnDto>();
-
+      
       CreateMap<Core.Entities.Identity.ShippingAddress, ShippingAddressToReturnDto>().ReverseMap();
+      CreateMap<Core.Entities.Identity.BillingAddress, BillingAddressToReturnDto>().ReverseMap();
 
       CreateMap<ShippingAddressToReturnDto, ShippingAddress>();
+      CreateMap<BillingAddressToReturnDto, BillingAddress>();
 
       CreateMap<CustomerBasketDto, CustomerBasket>();
 

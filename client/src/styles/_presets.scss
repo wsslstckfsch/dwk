@@ -1,4 +1,5 @@
 @import "../../node_modules/include-media/dist/include-media.scss";
+@import "tailwind-colors";
 
 $breakpoints: (
   "s": 640px,
@@ -7,19 +8,13 @@ $breakpoints: (
   "xl": 1600px,
 );
 
-$grey-l: #e2e2e2;
-$grey: rgb(80, 80, 80);
-$grey-d: #171717;
-$blue-l: rgb(22, 149, 192);
-$red: red;
-
 $global-font-family: "antipasto", sans-serif;
-$global-primary-background: $grey-d;
-$global-link-color: $grey-d;
-$global-link-hover-color: $grey-d;
-$button-secondary-background: $grey;
-$button-secondary-color: lighten($button-secondary-background, 30%);
-$button-secondary-hover-background: darken($button-secondary-background, 2%);
-$button-secondary-hover-color: lighten($button-secondary-background, 35%);
+$global-primary-background: $orange-600;
+$global-link-color: $gray-800;
+$global-link-hover-color: $orange-600;
+$button-secondary-background: $gray-400;
+$button-secondary-color: lighten($button-secondary-background, 50%);
+$button-secondary-hover-background: darken($button-secondary-background, 10%);
+$button-secondary-hover-color: lighten($button-secondary-background, 50%);
 $button-secondary-active-background: darken($button-secondary-background, 5%);
-$button-secondary-active-color: lighten($button-secondary-background, 35%);
+$button-secondary-active-color: lighten($button-secondary-background, 40%);

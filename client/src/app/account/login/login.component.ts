@@ -9,6 +9,7 @@ import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +79,8 @@ export class LoginComponent implements OnInit {
   onRegister(): void {
     this.accountService.register(this.registerForm.value).subscribe(
       (response) => {
-        this.router.navigateByUrl('/shop');
+        const currentLang = this.sharedService.checkLang();
+        this.router.navigateByUrl('/' + currentLang + '/shop');
       },
       (error) => {
         console.log(error);

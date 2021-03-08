@@ -1,24 +1,30 @@
 <ng-container>
-  <div class="uk-container uk-margin-top">
+  <div>
     <h2>Checkout</h2>
 
     <div class="checkout-grid">
       <div>
         <ul
           class="uk-subnav uk-subnav-pill"
-          uk-switcher="animation: uk-animation-fade"
           id="switcher"
+          uk-switcher="animation: uk-animation-fade"
         >
-          <li><a href="#">Addresses</a></li>
+          <li><a href="#">Billing</a></li>
+          <li><a href="#">Shipping</a></li>
           <li><a href="#">Review</a></li>
           <li><a href="#">Payment</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
           <li>
-            <app-checkout-addresses
+            <app-checkout-address-billing
               [checkoutForm]="checkoutForm"
-            ></app-checkout-addresses>
+            ></app-checkout-address-billing>
+          </li>
+          <li>
+            <app-checkout-address-shipping
+              [checkoutForm]="checkoutForm"
+            ></app-checkout-address-shipping>
           </li>
           <li>
             <app-checkout-review></app-checkout-review>

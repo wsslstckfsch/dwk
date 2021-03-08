@@ -55,6 +55,15 @@ namespace API.Controllers
 
       return _mapper.Map<ShippingAddress, ShippingAddressToReturnDto>(user.ShippingAddress);
     }
+    
+    [Authorize]
+    [HttpGet("billing-address")]
+    public async Task<ActionResult<BillingAddressToReturnDto>> GetUserBillingAddress()
+    {
+      var user = await _userManager.FindUserWithAddressesByClaimAsync(User);
+
+      return _mapper.Map<BillingAddress, BillingAddressToReturnDto>(user.BillingAddress);
+    }
 
     [Authorize]
     [HttpPut("shipping-address")]
@@ -72,7 +81,26 @@ namespace API.Controllers
         return Ok(_mapper.Map<ShippingAddress, ShippingAddressToReturnDto>(user.ShippingAddress));
       }
 
-      return BadRequest("Issue updating the user addresses");
+      return BadRequest("Issue updating the user shipping address");
+    }
+    
+    [Authorize]
+    [HttpPut("billing-address")]
+    public async Task<ActionResult<BillingAddressToReturnDto>> UpdateUserBillingAddress(
+      BillingAddressToReturnDto address)
+    {
+      var user = await _userManager.FindUserWithAddressesByClaimAsync(User);
+
+      user.BillingAddress = _mapper.Map<BillingAddressToReturnDto, BillingAddress>(address);
+
+      var result = await _userManager.UpdateAsync(user);
+
+      if (result.Succeeded)
+      {
+        return Ok(_mapper.Map<BillingAddress, BillingAddressToReturnDto>(user.BillingAddress));
+      }
+
+      return BadRequest("Issue updating the user billing address");
     }
 
     [HttpPost("login")]

@@ -47,9 +47,9 @@ namespace Infrastructure.Services
       foreach (var item in basket.Items)
       {
         var productItem = await _unityOfWork.Repository<Core.Entities.Product>().GetByIdAsync(item.Id);
-        if (item.Price != productItem.Price)
+        if (item.Price != productItem.PriceB2c)
         {
-          item.Price = productItem.Price;
+          item.Price = productItem.PriceB2c;
         }
       }
 

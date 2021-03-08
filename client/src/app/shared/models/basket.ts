@@ -16,6 +16,7 @@ export interface IBasketItem {
   quantity: number;
   imageUrl: string;
   productType: string;
+  b2bPrice: boolean;
 }
 
 export class Basket implements IBasket {

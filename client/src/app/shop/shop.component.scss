@@ -1,6 +1,6 @@
 @import "src/styles/presets";
 
-.top-bar {
+.shop-filters {
   display: grid;
   @include media(">m") {
     grid-template-columns: auto auto;
@@ -32,22 +32,28 @@
   padding: 0;
   display: grid;
   gap: 1rem;
-  @include media(">m") {
+  @include media(">s") {
     grid-template-columns: repeat(2, 1fr);
   }
-  @include media(">l") {
+  @include media(">m") {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
   .uk-card-media-top {
     display: block;
     padding: 1rem;
   }
 
   .uk-card-body {
+    flex: 1;
     display: grid;
+    align-content: space-between;
     gap: 0.6rem;
 
     * {
@@ -63,6 +69,12 @@
 
   &__label {
     justify-self: start;
+  }
+
+  &__first-row {
+    a {
+      font-size: 1.3rem;
+    }
   }
 
   &__last-row {

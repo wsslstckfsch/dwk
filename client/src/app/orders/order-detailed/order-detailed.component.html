@@ -1,11 +1,11 @@
 <ng-container *ngIf="order && order.orderItems && order.shippingPrice">
-  <div class="uk-container uk-margin-top">
+  <div>
     <div class="checkout-grid">
       <div class="uk-overflow-auto">
         <app-basket-summary
-          [items]="order.orderItems"
           [isBasket]="false"
           [isOrder]="true"
+          [items]="order.orderItems"
         >
         </app-basket-summary>
       </div>

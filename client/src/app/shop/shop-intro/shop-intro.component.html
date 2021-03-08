@@ -1,0 +1,71 @@
+<div class="intro">
+  <div class="intro__one text">
+    <h1>DIE WIENER KÜCHE</h1>
+    <h2>
+      Cooked, photographed and written in Vienna by Ed Tötzl and the elite troop
+      from Naschmarkt
+    </h2>
+  </div>
+  <div class="intro__two">
+    <img [src]="'assets/img/home-book/' + currentLang + '.png'" alt="" />
+    <div class="text">
+      <h2>
+        THE VIENNA KITCHEN IS THE ONLY KITCHEN IN THE WORLD THAT'S NAMED AFTER
+        ITS CITY!
+      </h2>
+      <p>
+        In the multi-ethnic state of the monarchy, people came for centuries
+        from all over the world to Vienna and have brought their greatest
+        treasure with them: YOUR RECIPES!
+      </p>
+    </div>
+  </div>
+  <div class="intro__three text">
+    <p>
+      And we have prepared these recipes for you in such a way that EVERYONE can
+      cook them! But just turn the pages yourself and let yourself be convinced.
+    </p>
+    <p>
+      We have prepared these recipes for you in such a way that EVERYONE can
+      cook them! But just leaf through it yourself and let yourself be convinced
+    </p>
+  </div>
+  <div class="intro__four text">
+    <h2>Leaf through</h2>
+
+    <div
+      class="uk-position-relative uk-visible-toggle uk-light"
+      tabindex="-1"
+      uk-slider
+    >
+      <ul class="uk-slider-items uk-child-width-1-1">
+        <li *ngFor="let image of [].constructor(14); let i = index">
+          <img
+            [src]="
+              'assets/img/home-slider-book/' +
+              (currentLang === 'de' ? 'de' : 'en') +
+              '/' +
+              (i + 1) +
+              '.jpg'
+            "
+            alt=""
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="intro__five text">
+    <h2>DIE WIENER KÜCHE</h2>
+    <p>
+      As you can see when leafing through, every single step in our recipes is
+      explained in detail in pictures and text and supplemented with practical
+      tips!
+    </p>
+    <p>
+      And the photos show you exactly what then in your kitchen in the pot or on
+      the plate!
+    </p>
+  </div>
+</div>
+
+<app-shop></app-shop>

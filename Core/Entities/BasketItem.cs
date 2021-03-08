@@ -8,5 +8,6 @@
     public int Quantity { get; set; }
     public string ImageUrl { get; set; }
     public string ProductType { get; set; }
+    public bool B2bPrice { get; set; }
   }
 }

@@ -10,6 +10,7 @@ namespace Infrastructure.Data.Config
     public void Configure(EntityTypeBuilder<Order> builder)
     {
       builder.OwnsOne(o => o.ShippingAddress, a => { a.WithOwner(); });
+      builder.OwnsOne(o => o.BillingAddress, a => { a.WithOwner(); });
       builder.Property(s => s.Status)
         .HasConversion(
           o => o.ToString(),

@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "links": ["Shop", "Cart", "Account"],
+    "langs": ["German", "English", "Spanish", "Russian", "Japanese"]
+  },
+  "shop": {
+    "intro": {
+      "one": {
+        "header": "",
+        "par": ""
+      },
+      "two": {
+        "header": "",
+        "par": ""
+      },
+      "three": {
+        "par_1": "",
+        "par_2": ""
+      },
+      "four": {
+        "header": ""
+      },
+      "five": {
+        "header": "",
+        "par_1": "",
+        "par_2": ""
+      }
+    },
+    "filters": {
+      "alphabetical": "",
+      "price_asc": "",
+      "price_desc": "",
+      "all_books": "",
+      "search": "",
+      "reset": ""
+    }
+  },
+  "cart": {
+    "product": "",
+    "price": "",
+    "quantity": "",
+    "total": ""
+  },
+  "order_sum": {
+    "subtotal": "",
+    "shipping": "",
+    "shipping_disclaimer": "",
+    "total": "",
+    "proceed_to_checkout": ""
+  },
+  "checkout": {
+    "billing": "",
+    "shipping": "",
+    "review": "",
+    "payment": {
+      "credit_card_name": ""
+    },
+    "back_to_basket": "",
+    "to_shipping": "",
+    "to_billing": "",
+    "to_review": "",
+    "to_payment": "",
+    "submit_order": ""
+  },
+  "form": {
+    "full_name": "",
+    "uid": "",
+    "address_line": "",
+    "street": "",
+    "city": "",
+    "zip": "",
+    "country": ""
+  },
+  "imprint": {
+    "part_1": "IMRESSUM: Ed Tötzl & Michael Patocka, 1010 Vienna, Börsegasse 9, ",
+    "link_html": "<a href=\"mailto:ed@thedirty12.at\" target=\"_top\">ed@thedirty12.at</a>",
+    "part_2": ", ISBN: 978-3-9519859-5-4"
+  }
+}

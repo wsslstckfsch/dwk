@@ -1,80 +1,90 @@
 <ng-container *ngIf="productTypes && products">
-  <div class="uk-container uk-margin-large-top">
-    <hr class="uk-divider-icon" />
+  <hr class="page-divider uk-divider-icon" />
 
-    <div class="top-bar uk-margin-large-top">
-      <div class="top-bar__left">
-        <select (change)="onSortSelected($event)" class="uk-select">
-          <option
-            *ngFor="let sort of sortOptions"
-            [value]="sort.value"
-            [selected]="shopParams.sort === sort.value"
-          >
-            {{ sort.name }}
-          </option>
-        </select>
+  <div class="shop-filters">
+    <div class="shop-filters__left">
+      <select (change)="onSortSelected($event)" class="uk-select">
+        <option
+          *ngFor="let sort of sortOptions"
+          [selected]="shopParams.sort === sort.value"
+          [value]="sort.value"
+        >
+          {{ sort.name }}
+        </option>
+      </select>
 
-        <select (change)="onTypeSelected($event)" class="uk-select">
-          <option *ngFor="let type of productTypes" [value]="type.id">
-            {{ type.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="top-bar__right">
-        <div class="uk-inline">
-          <a class="uk-form-icon" href="#" uk-icon="icon: search"></a>
-          <input
-            #search
-            (keyup.enter)="onSearch()"
-            class="uk-input"
-            type="text"
-          />
-        </div>
-        <button (click)="onSearch()" class="uk-button uk-button-default">
-          Suchen
-        </button>
-        <button (click)="onReset()" class="uk-button uk-button-default">
-          Reset
-        </button>
-      </div>
+      <select (change)="onTypeSelected($event)" class="uk-select">
+        <option *ngFor="let type of productTypes" [value]="type.id">
+          {{ type.name }}
+        </option>
+      </select>
     </div>
 
-    <ul class="cards">
-      <li *ngFor="let product of products" class="card">
-        <div class="uk-card uk-card-default">
-          <a
-            routerLink="/shop/{{ product.id }}"
-            class="uk-card-media-top img-overlay"
-          >
-            <img [src]="product.imageUrl" alt="" class="card__image" />
-            <div class="overlay">
-              <span uk-icon="icon: search; ratio: 3;"></span>
-            </div>
-          </a>
-          <div class="uk-card-body">
-            <a routerLink="/shop/{{ product.id }}">
-              <h3 class="uk-card-title">{{ product.name }}</h3>
-            </a>
-            <div class="labels">
-              <span class="uk-label card__label">{{
-                product.productType
-              }}</span>
-              <span class="uk-label card__label">{{ product.langAlpha2 }}</span>
-            </div>
-            <div class="card__last-row">
-              <p>{{ product.price | currency }}</p>
-              <button
-                (click)="addItemToBasket(product)"
-                class="uk-button uk-button-default"
-              >
-                <span uk-icon="cart"></span>
-                <span uk-icon="icon: plus; ratio: 0.6;"></span>
-              </button>
-            </div>
+    <div class="shop-filters__right">
+      <div class="uk-inline">
+        <a class="uk-form-icon" href="#" uk-icon="icon: search"></a>
+        <input
+          #search
+          (keyup.enter)="onSearch()"
+          class="uk-input"
+          type="text"
+        />
+      </div>
+      <button (click)="onSearch()" class="uk-button uk-button-primary">
+        Suchen
+      </button>
+      <button (click)="onReset()" class="uk-button uk-button-secondary">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <ul class="cards">
+    <li
+      *ngFor="let product of products"
+      class="card uk-card uk-card-default uk-card-small"
+    >
+      <a
+        [routerLink]="
+          '/' +
+          currentLang +
+          (onB2bPage ? '/wdv/shop/' + product.id : '/shop/' + product.id)
+        "
+        class="uk-card-media-top img-overlay"
+      >
+        <img [src]="product.imageUrl" alt="" class="card__image" />
+        <div class="overlay">
+          <span uk-icon="icon: search; ratio: 3;"></span>
+        </div>
+      </a>
+      <div class="uk-card-body">
+        <div class="card__first-row">
+          <a [routerLink]="'/' + currentLang + ('/shop/' + product.id)">{{
+            product.name
+          }}</a>
+          <div class="labels">
+            <span class="uk-label card__label">{{ product.productType }}</span>
+            <span class="uk-label card__label">{{ product.langAlpha2 }}</span>
           </div>
         </div>
-      </li>
-    </ul>
-  </div>
+        <div class="card__last-row">
+          <p>
+            <strong *ngIf="!onB2bPage">{{
+              product.priceB2c | currency: "EUR":"symbol"
+            }}</strong>
+            <strong *ngIf="onB2bPage">{{
+              product.priceB2b | currency: "EUR":"symbol"
+            }}</strong>
+          </p>
+          <button
+            (click)="addItemToBasket(product)"
+            class="uk-button uk-button-default"
+          >
+            <span uk-icon="cart"></span>
+            <span uk-icon="icon: plus; ratio: 0.6;"></span>
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
 </ng-container>

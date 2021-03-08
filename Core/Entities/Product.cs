@@ -7,14 +7,14 @@ namespace Core.Entities
     public string LangAlpha2 { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public decimal Price { get; set; }
+    public decimal PriceB2c { get; set; }
+    public decimal PriceB2b { get; set; }
     public string ImageUrl { get; set; }
     public string Isbn { get; set; }
-    public int Pages { get; set; }
+    public int SliderImages { get; set; }
+    public string DownloadLink { get; set; }
 
     public ProductType ProductType { get; set; }
     public int ProductTypeId { get; set; }
-
-    public List<ProductImage> Images { get; set; }
   }
 }

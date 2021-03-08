@@ -15,15 +15,22 @@
           <div class="img-name">
             <img [src]="item.imageUrl" alt="" />
             <a
-              [href]="'/shop/' + (item.id || item.productId)"
+              [routerLink]="
+                '/' +
+                currentLang +
+                (onB2bPage
+                  ? '/wdv/shop/' + (item.id || item.productId)
+                  : '/shop/' + (item.id || item.productId))
+              "
               class="uk-text-nowrap"
-              ><span>{{ item.productName }}</span></a
             >
+              <span>{{ item.productName }}</span>
+            </a>
           </div>
         </td>
-        <td>{{ item.price | currency }}</td>
+        <td>{{ item.price | currency: "EUR":"symbol" }}</td>
         <td *ngIf="!isBasket">{{ item.quantity }}</td>
-        <td>{{ item.price * item.quantity | currency }}</td>
+        <td>{{ item.price * item.quantity | currency: "EUR":"symbol" }}</td>
         <td *ngIf="isBasket">
           <div class="button-group">
             <div class="incrementer">

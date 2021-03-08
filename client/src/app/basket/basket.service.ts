@@ -17,11 +17,11 @@ import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 })
 export class BasketService {
   baseUrl = environment.apiUrl;
+  shipping = 0;
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
   private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
-  shipping = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +36,9 @@ export class BasketService {
   }
 
   setShippingPrice(deliveryMethod: IDeliveryMethod): void {
+    if (!deliveryMethod) {
+      return;
+    }
     this.shipping = deliveryMethod.price;
     const basket = this.getCurrentBasketValue();
     basket.deliveryMethodId = deliveryMethod.id;
@@ -70,28 +73,31 @@ export class BasketService {
     return this.basketSource.value;
   }
 
-  addItemToBasket(item: IProduct, quantity = 1): void {
+  addItemToBasket(item: IProduct, quantity = 1, b2bPrice = false): void {
     const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(
       item,
-      quantity
+      quantity,
+      b2bPrice
     );
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }
 
-  incrementItemQuantity(item: IBasketItem): void {
+  incrementItemQuantity(item: IBasketItem, quantity: number): void {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
-    basket.items[foundItemIndex].quantity++;
+    basket.items[foundItemIndex].quantity =
+      basket.items[foundItemIndex].quantity + quantity;
     this.setBasket(basket);
   }
 
-  decrementItemQuantity(item: IBasketItem): void {
+  decrementItemQuantity(item: IBasketItem, quantity: number): void {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
     if (basket.items[foundItemIndex].quantity > 1) {
-      basket.items[foundItemIndex].quantity--;
+      basket.items[foundItemIndex].quantity =
+        basket.items[foundItemIndex].quantity - quantity;
       this.setBasket(basket);
     } else {
       this.removeItemFromBasket(item);
@@ -131,12 +137,14 @@ export class BasketService {
 
   private mapProductItemToBasketItem(
     item: IProduct,
-    quantity: number
+    quantity: number,
+    b2bPrice: boolean
   ): IBasketItem {
     return {
+      b2bPrice,
       id: item.id,
       productName: item.name,
-      price: item.price,
+      price: b2bPrice ? item.priceB2b : item.priceB2c,
       imageUrl: item.imageUrl,
       quantity,
       productType: item.productType,

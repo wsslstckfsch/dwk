@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IBasket } from '../../shared/models/basket';
 import { IOrder } from '../../shared/models/order';
 import { NavigationExtras, Router } from '@angular/router';
+import { SharedService } from '../../shared/shared.service';
 
 declare var Stripe;
 
@@ -45,7 +46,8 @@ export class CheckoutPaymentComponent
     private basketService: BasketService,
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {}
 
   ngAfterViewInit(): void {
@@ -106,7 +108,9 @@ export class CheckoutPaymentComponent
       if (paymentResult.paymentIntent) {
         this.basketService.deleteBasket(basket);
         const navigationExtras: NavigationExtras = { state: createdOrder };
-        this.router.navigate(['checkout/success'], navigationExtras);
+        const currentLang = this.sharedService.checkLang();
+        const url = '/' + currentLang + '/checkout/success';
+        this.router.navigate([url], navigationExtras);
       } else {
         this.toastr.error(paymentResult.error.message);
       }
@@ -129,6 +133,7 @@ export class CheckoutPaymentComponent
         .get('shippingAddressForm')
         .get('country').value,
       shippingAddress: this.checkoutForm.get('shippingAddressForm').value,
+      billingAddress: this.checkoutForm.get('billingAddressForm').value,
     };
   }
 

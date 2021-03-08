@@ -1,9 +1,11 @@
-import { IUserAddress } from './userAddress';
+import { IUserShippingAddress } from './userShippingAddress';
+import { IUserBillingAddress } from './userBillingAddress';
 
 export interface IOrderToCreate {
   basketId: string;
   deliveryMethodId: number;
-  shippingAddress: IUserAddress;
+  shippingAddress: IUserShippingAddress;
+  billingAddress: IUserBillingAddress;
 }
 
 export interface IOrder {
@@ -11,7 +13,8 @@ export interface IOrder {
   orderItems: IOrderItem[];
   buyerEmail: string;
   orderDate: string;
-  shippingAddress: IUserAddress;
+  shippingAddress: IUserShippingAddress;
+  billingAddress: IUserBillingAddress;
   deliveryMethod: string;
   shippingPrice: number;
   subtotal: number;

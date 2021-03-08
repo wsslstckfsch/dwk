@@ -1,0 +1,12 @@
+@import "src/styles/presets";
+@import "src/styles/tailwind-colors";
+
+.login-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 2rem;
+
+  &__divider {
+    background: $gray-400;
+  }
+}

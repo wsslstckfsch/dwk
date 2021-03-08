@@ -1,9 +1,21 @@
-<nav class="uk-navbar-container navbar" uk-navbar>
+<nav class="navbar">
   <ul class="navbar__list">
     <li>
       <a
+        [href]="
+          currentLang === 'de'
+            ? 'http://www.dasletztekochbuch.at/books/'
+            : 'http://www.dasletztekochbuch.at/eng_paperbooks/'
+        "
+      >
+        <span uk-icon="icon: home"></span>
+      </a>
+    </li>
+    <li></li>
+    <li>
+      <a
+        [routerLink]="'/' + currentLang + (onB2bPage ? '/wdv/shop' : '/shop')"
         [routerLinkActiveOptions]="{ exact: true }"
-        routerLink="/shop"
         routerLinkActive="active"
         >SHOP</a
       >
@@ -11,44 +23,64 @@
     <li></li>
     <li>
       <a
+        [routerLink]="
+          '/' + currentLang + (onB2bPage ? '/wdv/basket' : '/basket')
+        "
         [routerLinkActiveOptions]="{ exact: true }"
-        routerLink="/basket"
         routerLinkActive="active"
         >WARENKORB</a
       >
     </li>
     <li></li>
-    <li><a href="#">KONTAKT</a></li>
-    <li></li>
     <li>
-      <ng-container *ngIf="(currentUser$ | async) === null">
-        <a
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="/account/login"
-          routerLinkActive="active"
-          >ACCOUNT</a
-        >
-      </ng-container>
-      <ng-container *ngIf="currentUser$ | async">
-        <a
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="/orders"
-          routerLinkActive="active"
-          >ACCOUNT</a
-        >
-      </ng-container>
+      <a
+        [routerLink]="
+          '/' +
+          currentLang +
+          (onB2bPage
+            ? (currentUser$ | async)
+              ? '/orders'
+              : '/wdv/account/login'
+            : (currentUser$ | async)
+            ? '/orders'
+            : '/account/login')
+        "
+        [routerLinkActiveOptions]="{ exact: false }"
+        routerLinkActive="active"
+        >ACCOUNT</a
+      >
     </li>
   </ul>
 
   <ul class="navbar__list">
-    <li class="uk-active"><a href="#">DEUTSCH</a></li>
+    <li>
+      <a (click)="changeLang('de')" [class.active]="currentLang === 'de'"
+        >DEUTSCH</a
+      >
+    </li>
     <li></li>
-    <li><a href="#">ENGLISCH</a></li>
+    <li>
+      <a (click)="changeLang('en')" [class.active]="currentLang === 'en'"
+        >ENGLISCH</a
+      >
+    </li>
     <li></li>
-    <li><a href="#">SPANISCH</a></li>
+    <li>
+      <a (click)="changeLang('es')" [class.active]="currentLang === 'es'"
+        >SPANISCH</a
+      >
+    </li>
     <li></li>
-    <li><a href="#">RUSSISCH</a></li>
+    <li>
+      <a (click)="changeLang('ru')" [class.active]="currentLang === 'ru'"
+        >RUSSISCH</a
+      >
+    </li>
     <li></li>
-    <li><a href="#">JAPANISCH</a></li>
+    <li>
+      <a (click)="changeLang('jp')" [class.active]="currentLang === 'jp'"
+        >JAPANISCH</a
+      >
+    </li>
   </ul>
 </nav>

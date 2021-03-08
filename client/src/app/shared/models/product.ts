@@ -1,14 +1,13 @@
-import { IProductImage } from './productImage';
-
 export interface IProduct {
   id: number;
   langAlpha2: string;
   name: string;
   description: string;
-  price: number;
+  priceB2c: number;
+  priceB2b: number;
   imageUrl: string;
   isbn: string;
-  pages: number;
   productType: string;
-  images: IProductImage[];
+  sliderImages: number;
+  downloadLink: string;
 }

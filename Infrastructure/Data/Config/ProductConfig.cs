@@ -11,7 +11,8 @@ namespace Infrastructure.Data.Config
       builder.Property(p => p.LangAlpha2).IsRequired();
       builder.Property(p => p.Name).IsRequired();
       builder.Property(p => p.Description).IsRequired();
-      builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
+      builder.Property(p => p.PriceB2c).HasColumnType("decimal(18,2)");
+      builder.Property(p => p.PriceB2b).HasColumnType("decimal(18,2)");
     }
   }
 }

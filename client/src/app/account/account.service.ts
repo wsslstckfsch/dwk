@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { IUser } from '../shared/models/user';
-import { IUserAddress } from '../shared/models/userAddress';
+import { IUserShippingAddress } from '../shared/models/userShippingAddress';
+import { IUserBillingAddress } from '../shared/models/userBillingAddress';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,11 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sharedService: SharedService
+  ) {}
 
   loadCurrentUser(token: string): Observable<void> {
     if (token === null) {
@@ -61,7 +67,8 @@ export class AccountService {
   logout(): void {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
-    this.router.navigateByUrl('/shop');
+    const currentLang = this.sharedService.checkLang();
+    this.router.navigateByUrl('/' + currentLang + '/shop');
   }
 
   checkEmailExists(email: string): Observable<boolean> {
@@ -70,15 +77,32 @@ export class AccountService {
     );
   }
 
-  getUserShippingAddress(): Observable<IUserAddress> {
-    return this.http.get<IUserAddress>(
+  getUserShippingAddress(): Observable<IUserShippingAddress> {
+    return this.http.get<IUserShippingAddress>(
       `${this.baseUrl}/account/shipping-address`
     );
   }
 
-  updateUserShippingAddress(address: IUserAddress): Observable<IUserAddress> {
-    return this.http.put<IUserAddress>(
+  getUserBillingAddress(): Observable<IUserBillingAddress> {
+    return this.http.get<IUserBillingAddress>(
+      `${this.baseUrl}/account/billing-address`
+    );
+  }
+
+  updateUserShippingAddress(
+    address: IUserShippingAddress
+  ): Observable<IUserShippingAddress> {
+    return this.http.put<IUserShippingAddress>(
       `${this.baseUrl}/account/shipping-address`,
+      address
+    );
+  }
+
+  updateUserBillingAddress(
+    address: IUserBillingAddress
+  ): Observable<IUserBillingAddress> {
+    return this.http.put<IUserBillingAddress>(
+      `${this.baseUrl}/account/billing-address`,
       address
     );
   }

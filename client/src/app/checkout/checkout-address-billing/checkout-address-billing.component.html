@@ -1,0 +1,69 @@
+<div [formGroup]="checkoutForm" class="checkout-page">
+  <div class="cols-between">
+    <h4 class="uk-margin-remove-bottom">Billing</h4>
+    <button
+      (click)="saveUserBillingAddress()"
+      [disabled]="
+        !checkoutForm.get('billingAddressForm').valid ||
+        !checkoutForm.get('billingAddressForm').dirty
+      "
+      class="uk-button uk-button-default uk-button-small"
+    >
+      Save as default address
+    </button>
+  </div>
+
+  <div class="form" formGroupName="billingAddressForm">
+    <app-text-input
+      [label]="'Full name'"
+      formControlName="fullName"
+    ></app-text-input>
+    <app-text-input [label]="'UID'" formControlName="uid"></app-text-input>
+    <app-text-input
+      [label]="'Address line'"
+      formControlName="addressLine1"
+    ></app-text-input>
+    <app-text-input
+      [label]="'Street address'"
+      formControlName="streetAddress"
+    ></app-text-input>
+    <app-text-input
+      [label]="'City'"
+      class="span-half"
+      formControlName="city"
+    ></app-text-input>
+    <app-text-input
+      [label]="'Zip'"
+      class="span-half"
+      formControlName="zip"
+    ></app-text-input>
+    <div>
+      <label class="uk-form-label">Country {{ currentBillingValue }}</label>
+      <div class="uk-form-controls">
+        <select #deliveryMethod class="uk-select" formControlName="country">
+          <option *ngFor="let method of deliveryMethods" [value]="method.id">
+            <span>{{ method.shortName }}</span>
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-page__back-next cols-between">
+    <button
+      [routerLink]="'/' + currentLang + (onB2bPage ? '/wdv/basket' : '/basket')"
+      class="uk-button uk-button-default text-icon"
+    >
+      <span uk-icon="icon: chevron-left"></span>
+      <span>Back to basket</span>
+    </button>
+    <button
+      (click)="switchTab(1)"
+      [disabled]="checkoutForm.get('billingAddressForm').invalid"
+      class="uk-button uk-button-default text-icon"
+    >
+      <span>Shipping</span>
+      <span uk-icon="icon: chevron-right"></span>
+    </button>
+  </div>
+</div>

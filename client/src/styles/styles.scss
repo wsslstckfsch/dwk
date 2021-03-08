@@ -27,6 +27,38 @@ html {
   }
 }
 
+input,
+select,
+textarea {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.page-divider {
+  margin: 2rem 0;
+}
+
+.checkout-page {
+  display: grid;
+  gap: 1rem;
+
+  &__back-next {
+    margin-top: 1rem;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 0.6rem;
+  @include media(">m") {
+    grid-template-columns: 1fr 1fr;
+    > *:not(.span-half) {
+      grid-column: span 2;
+    }
+  }
+}
+
 .img-overlay {
   position: relative;
 

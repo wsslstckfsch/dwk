@@ -29,9 +29,10 @@ namespace API.Controllers
       var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
       var shippingAddress = _mapper.Map<ShippingAddressToReturnDto, ShippingAddress>(orderDto.ShippingAddress);
+      var billingAddress = _mapper.Map<BillingAddressToReturnDto, BillingAddress>(orderDto.BillingAddress);
 
       var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId,
-        shippingAddress);
+        shippingAddress, billingAddress);
 
       if (order == null)
       {

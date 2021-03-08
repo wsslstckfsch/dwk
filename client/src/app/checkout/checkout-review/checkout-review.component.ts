@@ -27,7 +27,7 @@ export class CheckoutReviewComponent implements OnInit {
     return this.basketService.createPaymentIntent().subscribe(
       (response: any) => {
         // Payment intent created
-        this.switchTab(2);
+        this.switchTab(3);
       },
       (error) => {
         console.log(error);

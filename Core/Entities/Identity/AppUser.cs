@@ -6,5 +6,6 @@ namespace Core.Entities.Identity
   {
     public string DisplayName { get; set; }
     public ShippingAddress ShippingAddress { get; set; }
+    public BillingAddress BillingAddress { get; set; }
   }
 }

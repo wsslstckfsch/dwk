@@ -6,20 +6,20 @@
       <tr>
         <td>Subtotal</td>
         <td>
-          <strong>{{ subtotal | currency }}</strong>
+          <strong>{{ subtotal | currency: "EUR":"symbol" }}</strong>
         </td>
       </tr>
       <tr>
         <td>Shipping</td>
         <td>
-          <strong>{{ shippingPrice | currency }} </strong>
+          <strong>{{ shippingPrice | currency: "EUR":"symbol" }} </strong>
         </td>
       </tr>
       <tr></tr>
       <tr>
         <td>Total</td>
         <td>
-          <strong>{{ total | currency }}</strong>
+          <strong>{{ total | currency: "EUR":"symbol" }}</strong>
         </td>
       </tr>
     </tbody>

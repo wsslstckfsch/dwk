@@ -1,0 +1,86 @@
+<div [formGroup]="checkoutForm" class="checkout-page">
+  <div class="cols-between">
+    <h4 class="uk-margin-remove-bottom">Shipping</h4>
+    <button
+      (click)="saveUserShippingAddress()"
+      [disabled]="!checkoutForm.get('shippingAddressForm').valid"
+      class="uk-button uk-button-default uk-button-small"
+    >
+      Save as default address
+    </button>
+  </div>
+
+  <div>
+    <label
+      ><input
+        (change)="patchShippingValues()"
+        [(ngModel)]="shippingIsBilling"
+        [ngModelOptions]="{ standalone: true }"
+        class="uk-checkbox"
+        type="checkbox"
+      />
+      Same address as Billing</label
+    >
+  </div>
+
+  <div class="form" formGroupName="shippingAddressForm">
+    <app-text-input
+      [label]="'Full name'"
+      formControlName="fullName"
+    ></app-text-input>
+    <app-text-input
+      [label]="'Address line'"
+      formControlName="addressLine1"
+    ></app-text-input>
+    <app-text-input
+      [label]="'Street address'"
+      formControlName="streetAddress"
+    ></app-text-input>
+    <app-text-input
+      [label]="'City'"
+      class="span-half"
+      formControlName="city"
+    ></app-text-input>
+    <app-text-input
+      [label]="'Zip'"
+      class="span-half"
+      formControlName="zip"
+    ></app-text-input>
+    <div>
+      <label class="uk-form-label">Country {{ currentShippingValue }}</label>
+      <div class="uk-form-controls">
+        <select
+          #deliveryMethod
+          (change)="setShippingPrice(deliveryMethod.value)"
+          class="uk-select"
+          formControlName="country"
+        >
+          <option *ngFor="let method of deliveryMethods" [value]="method.id">
+            <span
+              >{{ method.shortName }} -
+              {{ method.price | currency: "EUR":"symbol" }}</span
+            >
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-page__back-next cols-between">
+    <button
+      (click)="switchTab(0)"
+      class="uk-button uk-button-default text-icon"
+    >
+      <span uk-icon="icon: chevron-left"></span>
+      <span>Billing</span>
+    </button>
+    <button
+      (click)="switchTab(2)"
+      [disabled]="checkoutForm.get('shippingAddressForm').invalid"
+      class="uk-button uk-button-default text-icon"
+    >
+      <span>Review</span>
+      <span uk-icon="icon: chevron-right"></span>
+    </button>
+  </div>
+</div>

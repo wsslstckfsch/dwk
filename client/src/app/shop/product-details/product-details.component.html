@@ -1,6 +1,10 @@
 <ng-container *ngIf="product">
-  <div class="product-grid uk-container uk-margin-top">
-    <a (click)="openLightbox()" class="product-grid__image img-overlay">
+  <div class="product-grid">
+    <a
+      (click)="openLightbox()"
+      class="product-grid__image img-overlay"
+      uk-sticky="bottom: .product-grid; offset: 30"
+    >
       <img [src]="product.imageUrl" alt="" />
       <div class="overlay">
         <span uk-icon="icon: search; ratio: 3;"></span>
@@ -13,7 +17,14 @@
         <span class="uk-label card__label">{{ product.productType }}</span>
         <span class="uk-label card__label">{{ product.langAlpha2 }}</span>
       </div>
-      <h4>{{ product.price | currency }}</h4>
+      <h4>
+        <ng-container *ngIf="onB2bPage">
+          {{ product.priceB2b | currency: "EUR":"symbol" }}
+        </ng-container>
+        <ng-container *ngIf="!onB2bPage">
+          {{ product.priceB2c | currency: "EUR":"symbol" }}
+        </ng-container>
+      </h4>
       <div class="cart-buttons">
         <div class="incrementer">
           <button
@@ -38,21 +49,19 @@
           <span uk-icon="icon: plus; ratio: 0.6;"></span>
         </button>
       </div>
-      <div [innerHTML]="product.description"></div>
 
-      <small>{{ staticContentUrl }}/static/images/products/1.png</small>
+      <div [innerHTML]="product.description" class="inner-html"></div>
 
       <div id="lightbox" uk-lightbox="animation: slide">
         <a
-          data-caption="Caption 1"
-          href="{{ staticContentUrl }}/static/images/products/1.png"
-          >Vorschau</a
-        >
-        <a
-          data-caption="Caption 2"
-          href="{{ staticContentUrl }}/static/images/products/2.png"
+          *ngFor="
+            let image of [].constructor(product.sliderImages);
+            let i = index
+          "
+          href="{{ staticContentUrl }}/static/images/products/{{
+            product.id
+          }}/{{ i + 1 }}.{{ i > 0 ? 'jpg' : 'png' }}"
         ></a>
-        <a data-caption="Caption 3" href="https://picsum.photos/500"></a>
       </div>
     </div>
   </div>

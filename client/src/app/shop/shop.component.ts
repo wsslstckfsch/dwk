@@ -4,6 +4,9 @@ import { ShopService } from './shop.service';
 import { IProductType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
 import { BasketService } from '../basket/basket.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { SharedService } from '../shared/shared.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
@@ -21,21 +24,35 @@ export class ShopComponent implements OnInit {
     { name: 'Price Asc', value: 'priceAsc' },
     { name: 'Price Desc', value: 'priceDesc' },
   ];
+  onB2bPage: boolean;
+  currentLang: string;
 
   constructor(
     private shopService: ShopService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private sharedService: SharedService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.shopParams = this.shopService.getShopParams();
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentLang = this.sharedService.checkLang();
+        this.onB2bPage = this.sharedService.onB2bPage();
+        this.shopParams = this.shopService.getShopParams();
+        this.getProducts(true);
+        this.getProductTypes();
+      });
   }
 
-  ngOnInit(): void {
-    this.getProducts(true);
-    this.getProductTypes();
-  }
+  ngOnInit(): void {}
 
   addItemToBasket(product: IProduct): void {
-    this.basketService.addItemToBasket(product);
+    if (this.onB2bPage) {
+      this.basketService.addItemToBasket(product, 5, this.onB2bPage);
+    } else {
+      this.basketService.addItemToBasket(product, 1, this.onB2bPage);
+    }
   }
 
   getProducts(useCache = false): void {

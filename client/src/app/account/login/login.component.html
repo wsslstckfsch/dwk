@@ -1,13 +1,9 @@
 <ng-container>
-  <div class="uk-container uk-margin-top">
+  <div class="login-grid">
     <div>
       <h2>Login</h2>
 
-      <form
-        (ngSubmit)="onLogin()"
-        [formGroup]="loginForm"
-        class="uk-form-stacked"
-      >
+      <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="form">
         <app-text-input
           [label]="'Email address'"
           formControlName="email"
@@ -29,6 +25,8 @@
       </form>
     </div>
 
+    <div class="login-grid__divider"></div>
+
     <div>
       <h2>Register</h2>
 
@@ -36,11 +34,7 @@
         <li *ngFor="let error of registerErrors">{{ error }}</li>
       </ul>
 
-      <form
-        (ngSubmit)="onRegister()"
-        [formGroup]="registerForm"
-        class="uk-form-stacked"
-      >
+      <form (ngSubmit)="onRegister()" [formGroup]="registerForm" class="form">
         <app-text-input
           [label]="'Email address'"
           formControlName="email"

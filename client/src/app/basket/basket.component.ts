@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
 import { BasketService } from './basket.service';
+import { SharedService } from '../shared/shared.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basket',
@@ -11,8 +14,21 @@ import { BasketService } from './basket.service';
 export class BasketComponent implements OnInit {
   basket$: Observable<IBasket>;
   basketTotals$: Observable<IBasketTotals>;
+  onB2bPage: boolean;
+  currentLang: string;
 
-  constructor(private basketService: BasketService) {}
+  constructor(
+    private basketService: BasketService,
+    private sharedService: SharedService,
+    private router: Router
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentLang = this.sharedService.checkLang();
+        this.onB2bPage = this.sharedService.onB2bPage();
+      });
+  }
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
@@ -24,10 +40,10 @@ export class BasketComponent implements OnInit {
   }
 
   incrementItemQuantity(item: IBasketItem): void {
-    this.basketService.incrementItemQuantity(item);
+    this.basketService.incrementItemQuantity(item, this.onB2bPage ? 5 : 1);
   }
 
   decrementItemQuantity(item: IBasketItem): void {
-    this.basketService.decrementItemQuantity(item);
+    this.basketService.decrementItemQuantity(item, this.onB2bPage ? 5 : 1);
   }
 }
